@@ -1,4 +1,4 @@
-# Ruby Server Silo Example
+# Ruby
 
 A standalone example of a working server silos integrated with Transcend, written in Ruby using Sinatra and Faraday for simplicity.
 
