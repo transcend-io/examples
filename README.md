@@ -24,15 +24,38 @@ Create a file named `.env` and fill it out with your configuration
 ```sh
 TRANSCEND_API_KEY="<TODO>"
 SOMBRA_API_KEY="<TODO>"
-SOMBRA_URL="https://<TODO>.sombra.transcend.io"
 ORGANIZATION_URI="<TODO>"
+SOMBRA_URL="https://<TODO>.sombra.transcend.io"
 ```
+
+### TRANSCEND_API_KEY
+
+This API key authenticates you to Transcend, and you can generate it on the [admin dashboard](https://app.transcend.io/settings#Developer).
+API keys must be scoped to certain operations or data silos.
+
+### SOMBRA_API_KEY
+
+This API key authenticates you to to your sombra gateway.
+
+- If you are self hosting sombra, you would have generated this at time of setup and stored it securely.
+- If transcend is hosting the gateway on your behalf, you should have received this via some secure channel
+
+### ORGANIZATION_URI
+
+This is the unique uri of your organization on transcend found [here](https://app.transcend.io/settings#OrganizationSettings).
+
+### SOMBRA_URL
+
+This is the URL of your sombra gateway.
+
+- If you are self hosting, you assign this value
+- If transcend is hosting, it is often at "<<https://<ORGANIZATION_URI>.sombra.transcend.io">>
 
 ## Languages
 
 Checkout your language of choice for further details
 
 - [javascript](./javascript)
-- [typescript](./typescript)
 - [python](./python)
 - [ruby](./ruby)
+- [typescript](./typescript)
