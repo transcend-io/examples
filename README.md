@@ -25,7 +25,7 @@ ORGANIZATION_URI="<TODO>"
 SOMBRA_URL="https://<TODO>.sombra.transcend.io"
 ```
 
-**### **TRANSCEND_API_KEY
+### TRANSCEND_API_KEY
 
 This API key authenticates you to Transcend, and you can generate it on the [admin dashboard](https://app.transcend.io/settings#Developer).
 API keys must be scoped to certain operations or data silos.
