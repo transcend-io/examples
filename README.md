@@ -25,7 +25,7 @@ ORGANIZATION_URI="<TODO>"
 SOMBRA_URL="https://<TODO>.sombra.transcend.io"
 ```
 
-### TRANSCEND_API_KEY
+**### **TRANSCEND_API_KEY
 
 This API key authenticates you to Transcend, and you can generate it on the [admin dashboard](https://app.transcend.io/settings#Developer).
 API keys must be scoped to certain operations or data silos.
@@ -46,7 +46,7 @@ This is the unique uri of your organization on transcend found [here](https://ap
 This is the URL of your sombra gateway.
 
 - If you are self hosting, you assign this value
-- If transcend is hosting, it is often at "<<<<https://<ORGANIZATION_URI>.sombra.transcend.io">>>>
+- If transcend is hosting, it is often at `https://<ORGANIZATION_URI>.sombra.transcend.io`
 
 ## Languages
 
