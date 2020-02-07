@@ -50,7 +50,7 @@ This is the URL of your sombra gateway.
 
 ## Languages
 
-Checkout your language of choice for further details
+Check out your language of choice for further details
 
 - [javascript](./javascript)
 - [python](./python)
