@@ -8,9 +8,9 @@ These examples are meant to show you what the integration will look like when yo
 
 Each language has an example of how to:
 
-- Verify a webhook that is sent from transcend [see docs](https://docs.transcend.io/docs/receiving-webhooks)
-- How to perform identity enrichment by responding to a webhook [see docs](https://docs.transcend.io/docs/identity-enrichment)
-- How to respond to ACCESS/ERASURE and other DSR webhooks[see docs](https://docs.transcend.io/docs/responding-to-dsrs)
+- Verify a webhook that is sent from transcend ([docs](https://docs.transcend.io/docs/receiving-webhooks))
+- How to perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
+- How to respond to ACCESS/ERASURE and other DSR webhooks([docs](https://docs.transcend.io/docs/responding-to-dsrs))
 
 ## Languages
 
