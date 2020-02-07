@@ -1,6 +1,6 @@
 # Typescript
 
-Internal system integrations in typescript. Check out the parent [README](../) for more context.
+Internal system integrations in typescript. Check out the parent [README](../README.md) for more context.
 
 ## Installation
 

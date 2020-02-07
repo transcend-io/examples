@@ -1,6 +1,6 @@
 # Ruby
 
-Internal system integrations in ruby. Check out the parent [README](../) for more context.
+Internal system integrations in ruby. Check out the parent [README](../README.md) for more context.
 
 ## Installation
 
