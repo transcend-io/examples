@@ -4,25 +4,16 @@ A standalone example of a working server silos integrated with Transcend, writte
 
 ## Installation
 
-```
+```sh
 python3 -m venv env
 source ./env/bin/activate
 pip3 install -r requirements.txt
 ```
 
-## Create and trust a sample SSL certificate
-
-NOTE: The trust certificate script is intended for mac usage, you will need to manually trust the certificate otherwise.
-
-```
-./create_certificate.sh
-./trust_certificate.sh
-```
-
 ## Start the server
 
-```
-python3 main.py
+```sh
+python main.py
 ```
 
 ## Open the browser
