@@ -3,7 +3,7 @@ require 'sinatra'
 require 'jwt'
 require 'dotenv'
 
-Dotenv.load
+Dotenv.load('../.env')
 
 ########## ############### ###### ## #
 #   Constants
@@ -20,7 +20,7 @@ $SOMBRA_API_KEY = ENV["SOMBRA_API_KEY"]
 $SOMBRA_URL = ENV["SOMBRA_URL"]
 
 # The JWT audience
-$JWT_AUDIENCE=ENV["JWT_AUDIENCE"]
+$ORGANIZATION_URI=ENV["ORGANIZATION_URI"]
 
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always -- in production you should always verify the JWT
 $VERIFY_JWT = true
@@ -153,7 +153,7 @@ end
 # Retrieve core identifier
 def get_core_identifier(token)
     # A JWT that encodes the coreIdentifier like `{ "value": "12345" }`
-    options = { aud: $JWT_AUDIENCE, verify_aud: true, algorithm: 'ES384' }
+    options = { aud: $ORGANIZATION_URI, verify_aud: true, algorithm: 'ES384' }
     decoded_token = JWT.decode token, transcend_public_key, $VERIFY_JWT, options
     decoded_token[0]['value']
 end

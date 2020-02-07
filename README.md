@@ -12,10 +12,12 @@ Each language has an example of how to:
 - How to perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
 - How to respond to ACCESS/ERASURE and other DSR webhooks ([docs](https://docs.transcend.io/docs/responding-to-dsrs))
 
-## Configuration
+Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [datamap](https://app.transcend.io/data-map).
+
+## Try it in your environment
 
 To configure the example, you will need to set the
-`$TRANSCEND_API_KEY`, `$SOMBRA_API_KEY`, `$SOMBRA_URL`, `$JWT_AUDIENCE` values in the environment.
+`$TRANSCEND_API_KEY`, `$SOMBRA_API_KEY`, `$SOMBRA_URL`, `$ORGANIZATION_URI` values in the environment.
 
 Create a file named `.env` and fill it out with your configuration
 
@@ -23,7 +25,7 @@ Create a file named `.env` and fill it out with your configuration
 TRANSCEND_API_KEY="<TODO>"
 SOMBRA_API_KEY="<TODO>"
 SOMBRA_URL="https://<TODO>.sombra.transcend.io"
-JWT_AUDIENCE="<TODO>"
+ORGANIZATION_URI="<TODO>"
 ```
 
 ## Languages
