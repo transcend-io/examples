@@ -1,5 +1,7 @@
 # Ruby
 
+Internal system integrations in ruby. Check out the [parent README](../README.md) for more context.
+
 ## Installation
 
 Install ruby via homebrew

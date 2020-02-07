@@ -1,5 +1,7 @@
 # Typescript
 
+Internal system integrations in typescript. Check out the [parent README](../README.md) for more context.
+
 ## Installation
 
 ```sh
