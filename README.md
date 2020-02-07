@@ -16,10 +16,7 @@ Using [ngrok](https://ngrok.com/) you can actually [connect these examples](http
 
 ## Try it in your environment
 
-To configure the example, you will need to set the
-`$TRANSCEND_API_KEY`, `$SOMBRA_API_KEY`, `$SOMBRA_URL`, `$ORGANIZATION_URI` values in the environment.
-
-Create a file named `.env` and fill it out with your configuration
+To configure these example, you will need to create a file named `.env` and fill it out with your configuration
 
 ```sh
 TRANSCEND_API_KEY="<TODO>"
@@ -49,7 +46,7 @@ This is the unique uri of your organization on transcend found [here](https://ap
 This is the URL of your sombra gateway.
 
 - If you are self hosting, you assign this value
-- If transcend is hosting, it is often at "<<https://<ORGANIZATION_URI>.sombra.transcend.io">>
+- If transcend is hosting, it is often at "<<<<https://<ORGANIZATION_URI>.sombra.transcend.io">>>>
 
 ## Languages
 
