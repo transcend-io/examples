@@ -1,0 +1,26 @@
+{
+  "name": "eshopit",
+  "version": "1.0.0",
+  "description": "Example of an application integrated with Transcend.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Transcend Inc.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "express": "^4.17.1",
+    "got": "^11.6.2",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
+  }
+}
