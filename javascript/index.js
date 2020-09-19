@@ -1,61 +1,107 @@
+/* https://transcend-example.onrender.com/new-dsr */
+
 // Libraries
-const express = require("express");
-const bodyParser = require("body-parser");
-const request = require("request");
-const jws = require("jws");
+const express = require('express');
+const bodyParser = require('body-parser');
+const got = require('got');
+const jwt = require('jsonwebtoken');
+
+// Utils
+const {
+  checkIfSuspicious,
+  checkForLegalHolds
+} = require('./util');
+
+// Load environment variables
+require('dotenv').config();
+const {
+  TRANSCEND_API_KEY
+} = process.env;
 
 // Set up the server
 const app = express();
-const port = 4445;
-app.use(bodyParser.urlencoded({ extended: false }));
+const port = 8080;
+
+// Middlewares
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  }),
+);
+
 app.use(bodyParser.json());
 
-// Hard-coded API key - this is a secret that should be in the env variables or somewhere secure
-const MY_API_KEY = "xOFLvITmIFCA3InzYDUGX4tPw5bYvu0g6eEHK";
+app.all('/health', (_, res) => res.sendStatus(200));
+
+// Global to cache the Transcend public key.
+let cachedPublicKey;
 
 // Receive webhook (Transcend's notification to this server)
-app.all("/new-dsr", function(req, res) {
-  // Verify webhook signature (ensures that Transcend sent the request and someone else)
-  const isVerified = jws.verify(req.headers.signature, "HS256", MY_API_KEY);
+app.post('/new-dsr', async function (req, res, next) {
+  console.log({
+    body: req.body,
+    headers: req.headers
+  });
+  try {
+    // Get the public key and cache it for next time.
+    if (!cachedPublicKey) {
+      const {
+        body
+      } = await got.get(
+        'https://multi-tenant.sombra.transcend.io/public-keys/sombra-general-signing-key', {
+          headers: {
+            authorization: `Bearer ${TRANSCEND_API_KEY}`,
+          },
+        },
+      );
+      cachedPublicKey = body;
+    }
 
-  if (isVerified) {
+    // Verify webhook signature (ensures that Transcend sent the request)
+    const isVerified = jwt.verify(req.headers['x-sombra-token'], cachedPublicKey, {
+      algorithms: ['ES384'],
+    });
+
+    if (!isVerified) {
+      // Reject the request
+      return res.status(401).send('You are not Transcend!');
+    }
+
     // Respond 200 immediately
-    res.send("Thanks Transcend. I will send data soon!");
+    res.sendStatus(200);
+
+    /* ---- Everything below here can happen async (e.g. a job is scheduled above, and the result is returned below) ---- */
 
     // Look up personal data
-    const userProfiles = lookUpUser(req.body.identifiers);
+    const userProfiles = await lookUpUser(req.body.identifiers);
 
     // Send data to Transcend (via HTTP POST with JSON body)
-    request.post("https://api.transcend.io/v0/upload", {
+    got.post('https://multi-tenant.sombra.transcend.io/v1/upload', {
       headers: {
-        Authorization: MY_API_KEY
+        Authorization: `Bearer ${TRANSCEND_API_KEY}`,
+        'x-transcend-nonce': req.headers['x-transcend-nonce'],
+        // 'x-sombra-authorization': `Bearer ${SOMBRA}`, // TODO: TURN OFF INTERNAL_KEY ON MULTI
       },
-      body: {
-        request_id: req.body.request_id, // Retrieved from the webhook, this should be looked up in data storage
-        profiles: userProfiles
+      json: {
+        profiles: userProfiles,
       },
-      json: true
     });
-  } else {
-    // Reject the request
-    return res.status(401).send("You are not Transcend!");
+  } catch (err) {
+    console.log(err);
+    next(err);
   }
 });
 
 // Look inside a database and return the person's user profiles
-function lookUpUser() {
-  return [
-    {
-      profile_id: "ben.farrell",
-      profile_data: {
-        name: "Ben Farrell",
-        score: 3.8,
-        interests: "Privacy Tech"
-      }
-    }
-  ];
+async function lookUpUser() {
+  return [{
+    profileId: 'ben.farrell',
+    profileData: {
+      name: 'Ben Farrell',
+      score: 3.8,
+      interests: 'Privacy Tech',
+    },
+  }, ];
 }
 
-app.listen(port, () =>
-  console.log(`Example custom data silo listening on port ${port}!`)
-);
+app.listen(port, () => console.log(`Example custom data silo listening on port ${port}!`));
