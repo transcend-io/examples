@@ -6,12 +6,13 @@ const jwt = require('jsonwebtoken');
 const {
   TRANSCEND_API_KEY,
   ENRICHMENT_SIGNING_KEY,
-} = process.env;
+} = require('./constants');
+
+// In this example, the signing key is stored as a base64-encoded env var
+const DECODED_ENRICHMENT_SIGNING_KEY = Buffer.from(ENRICHMENT_SIGNING_KEY, 'base64').toString();
 
 // Global to cache the webhook signing public key
 let cachedPublicKey;
-// In this example, the signing key is stored as a base64-encoded env var
-const DECODED_ENRICHMENT_SIGNING_KEY = Buffer.from(ENRICHMENT_SIGNING_KEY, 'base64').toString();
 
 /**
  * Check user against fraud systems
@@ -87,9 +88,9 @@ module.exports.createEnricherJwt = (content) => jwt.sign(
 /**
  * Look inside a database and return the person's user profiles
  */
-module.exports.lookUpUser = async () => {
+module.exports.lookUpUser = async (userIdentifier) => {
   return [{
-    profileId: 'ben.farrell',
+    profileId: userIdentifier,
     profileData: {
       name: 'Ben Farrell',
       interests: 'Privacy Tech',

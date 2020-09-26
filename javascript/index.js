@@ -32,12 +32,13 @@ const {
 
 // Constants
 const {
-  TRANSCEND_API_KEY
-} = process.env;
+  TRANSCEND_API_KEY,
+  PORT,
+} = require('./constants');
 
 // Set up the server
 const app = express();
-const port = 8081;
+const port = PORT;
 
 // Middlewares
 app.use(morgan('tiny'));
@@ -59,9 +60,9 @@ app.all('/health', (_, res) => res.sendStatus(200));
 /**
  * Process an access request for this user
  */
-async function scheduleAccessRequest(userIdentifier, dataSubjectType, nonce) {
+async function scheduleAccessRequest(userIdentifier, nonce) {
   // Find user data
-  const userData = await lookUpUser(userIdentifier, dataSubjectType);
+  const userData = await lookUpUser(userIdentifier);
 
   // Upload in bulk to datapoints, with a JSON payload
   const bulkUpload = got.post('https://multi-tenant.sombra.transcend.io/v1/data-silo', {
@@ -85,7 +86,7 @@ async function scheduleAccessRequest(userIdentifier, dataSubjectType, nonce) {
       accept: 'application/json',
       'user-agent': undefined,
       'x-transcend-datapoint-name': 'Movies',
-      'x-transcend-profile-id': 'ben.farrell',
+      'x-transcend-profile-id': userIdentifier,
     }
   });
 
@@ -100,11 +101,6 @@ async function scheduleAccessRequest(userIdentifier, dataSubjectType, nonce) {
     console.error('Failed to upload to Transcend.', error.response.body);
   }
 }
-
-/**
- * Process an access request for this user
- */
-async function scheduleErasureRequest(userIdentifier, dataSubjectType, nonce) {}
 
 //////////////////////
 // WEBHOOK HANDLERS //
@@ -186,27 +182,23 @@ app.post(
     }
 
     // Extract metadata from the webhook
-    const userIdentifier = req.body.coreIdentifier; // we know this
-    const dataSubjectType = req.body.dataSubject.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
-    const webhookType = req.body.type;
+    const userIdentifier = req.body.coreIdentifier.value;
+    const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
     const nonce = req.headers['x-transcend-nonce'];
 
     // Depending on the type of webhook, respond accordingly.
     switch (webhookType) {
       case 'ACCESS':
         // Schedule the job to run. Results of the job are sent to Transcend separately (in a different HTTP request, in case the job is slow).
-        scheduleAccessRequest(userIdentifier, dataSubjectType, nonce);
+        scheduleAccessRequest(userIdentifier, nonce);
 
         // Respond OK - webhook received properly.
         res.sendStatus(200);
         break;
 
       case 'ERASURE':
-        // Schedule the job to run. Results of the job are sent to Transcend separately (in a different HTTP request, in case the job is slow).
-        scheduleErasureRequest(userIdentifier, dataSubjectType, nonce);
-
-        // Respond OK - webhook received properly.
-        res.sendStatus(200);
+        // Respond with an early "no user found" signal.
+        res.sendStatus(204);
         break;
 
       default:
