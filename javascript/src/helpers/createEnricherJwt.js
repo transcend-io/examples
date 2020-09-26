@@ -13,7 +13,7 @@ const DECODED_ENRICHMENT_SIGNING_KEY = Buffer.from(ENRICHMENT_SIGNING_KEY, 'base
  * Sign an identifier with a JWT
  * @param {Object} content
  */
-module.exports = async function createEnricherJwt(content) {
+module.exports = function createEnricherJwt(content) {
   return jwt.sign(
     // The content to sign
     content,
