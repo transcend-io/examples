@@ -20,7 +20,9 @@ const {
 /**
  * Process an access request for this user
  */
-module.exports = async function scheduleAccessRequest(userIdentifier, nonce) {
+module.exports = async function scheduleAccessRequest(userIdentifier, nonce, requestLink) {
+  console.info(`Uploading data - https://app.transcend.io${requestLink}`);
+
   // Find user data
   const userData = await lookUpUser(userIdentifier);
 
@@ -57,7 +59,8 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce) {
 
   try {
     await Promise.all([bulkUpload, fileUploadPipeline]);
+    console.info(`Successfully uploaded data - https://app.transcend.io${requestLink}`);
   } catch (error) {
-    console.error('Failed to upload to Transcend.', error.response.body);
+    console.error(`Failed to upload data - https://app.transcend.io${requestLink}`);
   }
 }

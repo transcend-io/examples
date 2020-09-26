@@ -55,4 +55,4 @@ app.post(
   handleDSRWebhook,
 );
 
-app.listen(port, () => console.log(`Example custom data silo listening on port ${port}.`));
+app.listen(port, () => console.info(`Example custom data silo listening on port ${port}.`));

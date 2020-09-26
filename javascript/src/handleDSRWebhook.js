@@ -20,6 +20,8 @@ module.exports = asyncHandler(async (req, res, next) => {
     return res.sendStatus(401).send('You are not Transcend!');
   }
 
+  console.info(`Received DSR webhook - https://app.transcend.io${req.body.extras.request.link}`);
+
   // Extract metadata from the webhook
   const userIdentifier = req.body.coreIdentifier.value;
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
@@ -29,7 +31,7 @@ module.exports = asyncHandler(async (req, res, next) => {
   switch (webhookType) {
     case 'ACCESS':
       // Schedule the job to run. Results of the job are sent to Transcend separately (in a different HTTP request, in case the job is slow).
-      scheduleAccessRequest(userIdentifier, nonce);
+      scheduleAccessRequest(userIdentifier, nonce, req.body.extras.request.link);
 
       // Respond OK - webhook received properly.
       res.sendStatus(200);
@@ -41,6 +43,9 @@ module.exports = asyncHandler(async (req, res, next) => {
       break;
 
     default:
-      res.status(400).send('This type of privacy request is unimplemented.');
+      console.warn(`This type of DSR webhook is unimplemented - https://app.transcend.io${req.body.extras.request.link}`);
+      return res.status(400).send('This type of privacy request is unimplemented.');
   }
+
+  console.info(`Successfully responded to DSR webhook - https://app.transcend.io${req.body.extras.request.link}`);
 });

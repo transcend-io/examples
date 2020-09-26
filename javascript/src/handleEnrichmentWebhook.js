@@ -22,6 +22,8 @@ module.exports = asyncHandler(async (req, res, next) => {
     return res.status(401).send('You are not Transcend!');
   }
 
+  console.info(`Received Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`);
+
   // Add new identifers
   const signedRequestIdentifiers = {
     email: [
@@ -59,7 +61,9 @@ module.exports = asyncHandler(async (req, res, next) => {
     });
 
   // Allow the request to proceed
-  return res.json({
+  res.json({
     signedRequestIdentifiers,
   });
+
+  console.info(`Successfully responded to Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`);
 });
