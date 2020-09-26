@@ -45,7 +45,7 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   });
 
   // Upload a file to a datapoint
-  const readFile = fs.createReadStream(path.join(__dirname, '/big_buck_bunny.mp4'));
+  const readFile = fs.createReadStream(path.join(__dirname, 'media/big_buck_bunny.mp4'));
   const fileUpload = got.stream.post('https://multi-tenant.sombra.transcend.io/v1/datapoint', {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
