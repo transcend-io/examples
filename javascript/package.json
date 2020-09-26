@@ -2,10 +2,10 @@
   "name": "eshopit",
   "version": "1.0.0",
   "description": "Example of an application integrated with Transcend.",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "ngrok": "ngrok http 8081",
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
