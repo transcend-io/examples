@@ -47,14 +47,14 @@ module.exports.verifyAndExtractWebhook = async (signedToken) => {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
-      const res = await got.get(
+      const response = await got.get(
         'https://multi-tenant.sombra.transcend.io/public-keys/sombra-general-signing-key', {
           headers: {
             authorization: `Bearer ${TRANSCEND_API_KEY}`,
           },
         },
       );
-      cachedPublicKey = res.body;
+      cachedPublicKey = response.body;
     } catch (err) {
       console.error('Failed to get public key:', err);
     }
@@ -66,20 +66,6 @@ module.exports.verifyAndExtractWebhook = async (signedToken) => {
   });
 
   return signedBody;
-}
-
-/**
- * Process an access request for this user
- */
-module.exports.scheduleAccessRequest = async (userIdentifier, dataSubjectType) => {
-  const userData = lookUpUser();
-}
-
-/**
- * Process an access request for this user
- */
-module.exports.scheduleErasureRequest = async (userIdentifier, dataSubjectType) => {
-  lookUpUser()
 }
 
 /**
@@ -101,13 +87,12 @@ module.exports.createEnricherJwt = (content) => jwt.sign(
 /**
  * Look inside a database and return the person's user profiles
  */
-async function lookUpUser() {
+module.exports.lookUpUser = async () => {
   return [{
     profileId: 'ben.farrell',
     profileData: {
       name: 'Ben Farrell',
-      score: 3.8,
       interests: 'Privacy Tech',
     },
-  }, ];
+  }];
 }
