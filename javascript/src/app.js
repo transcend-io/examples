@@ -23,6 +23,7 @@ const {
 // Set up the server
 const app = express();
 const port = PORT;
+app.all('/health', (_, res) => res.sendStatus(200));
 
 // Middlewares
 app.use(morgan('tiny'));
@@ -34,8 +35,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-
-app.all('/health', (_, res) => res.sendStatus(200));
 
 /*
  * Receive webhook for identity enrichment (optional)

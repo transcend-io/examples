@@ -11,7 +11,7 @@ const pipeline = promisify(stream.pipeline);
 // Constants
 const {
   TRANSCEND_API_KEY,
-} = require('../constants');
+} = require('./constants');
 
 // Helpers
 const {
