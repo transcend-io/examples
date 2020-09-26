@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "ngrok": "ngrok http 8081",
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
