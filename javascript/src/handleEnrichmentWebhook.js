@@ -8,10 +8,10 @@ const {
   verifyAndExtractWebhook,
 } = require('./helpers');
 
-/// //////////////////
-// WEBHOOK HANDLER //
-/// //////////////////
-
+/**
+ * Enrichment webhook handler.
+ * Checks for fraud/legal holds and returns extra identifiers.
+ */
 module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   let signedBody;

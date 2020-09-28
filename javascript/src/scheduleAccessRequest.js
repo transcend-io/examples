@@ -12,12 +12,8 @@ const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('./constants')
 // Helpers
 const { lookUpUser } = require('./helpers');
 
-/// ///////////////////
-// POST TO TRANSCND //
-/// ///////////////////
-
 /**
- * Process an access request for this user
+ * Process an access request for this user and upload the result to Transcend
  */
 module.exports = async function scheduleAccessRequest(userIdentifier, nonce, requestLink) {
   console.info(`Uploading data - https://app.transcend.io${requestLink}`);

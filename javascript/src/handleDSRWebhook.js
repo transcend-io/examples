@@ -7,6 +7,7 @@ const scheduleAccessRequest = require('./scheduleAccessRequest');
 
 /**
  * DSR webhook handler
+ * Receives the DSR notification and schedules an async job.
  */
 module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
