@@ -49,9 +49,9 @@ This is the unique URI of your organization on Transcend, found [here](https://a
 
 This is the URL of your Sombra gateway.
 
-- If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`
-- If you are self hosting, you assign this value
-- If Transcend is hosting, it is often at `https://<ORGANIZATION_URI>.sombra.transcend.io`
+- If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`.
+- If you are self hosting, you assign this value.
+- If Transcend is hosting, it is often at `https://<ORGANIZATION_URI>.sombra.transcend.io`.
 
 ## Languages
 
