@@ -1,4 +1,4 @@
-# examples
+# Examples
 
 Some examples of how to integrate with Transcend in various languages. See [our documentation](https://docs.transcend.io/) for further information.
 
@@ -53,7 +53,6 @@ This is the URL of your Sombra gateway.
 
 Check out your language of choice for further details
 
-- [javascript](./javascript)
-- [python](./python)
-- [ruby](./ruby)
-- [typescript](./typescript)
+- [JavaScript](./javascript)
+- [Python](./python)
+- [Ruby](./ruby)

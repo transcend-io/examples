@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 // Constants
 const {
   TRANSCEND_API_KEY,
+  SOMBRA_API_KEY,
 } = require('../constants');
 
 // Global to cache the webhook signing public key
@@ -23,9 +24,10 @@ module.exports = async function verifyAndExtractWebhook(signedToken) {
   if (!cachedPublicKey) {
     try {
       const response = await got.get(
-        'https://multi-tenant.sombra.transcend.io/public-keys/sombra-general-signing-key', {
+        `${SOMBRA_URL}/public-keys/sombra-general-signing-key`, {
           headers: {
             authorization: `Bearer ${TRANSCEND_API_KEY}`,
+            'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
           },
         },
       );

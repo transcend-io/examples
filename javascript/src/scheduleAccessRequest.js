@@ -11,6 +11,8 @@ const pipeline = promisify(stream.pipeline);
 // Constants
 const {
   TRANSCEND_API_KEY,
+  SOMBRA_API_KEY,
+  SOMBRA_URL,
 } = require('./constants');
 
 // Helpers
@@ -32,9 +34,10 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   const userData = await lookUpUser(userIdentifier);
 
   // Upload in bulk to datapoints, with a JSON payload
-  const bulkUpload = got.post('https://multi-tenant.sombra.transcend.io/v1/data-silo', {
+  const bulkUpload = got.post(`${SOMBRA_URL}/v1/data-silo`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
+      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,
@@ -46,9 +49,10 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
 
   // Upload a file to a datapoint
   const readFile = fs.createReadStream(path.join(__dirname, 'media/big_buck_bunny.mp4'));
-  const fileUpload = got.stream.post('https://multi-tenant.sombra.transcend.io/v1/datapoint', {
+  const fileUpload = got.stream.post(`${SOMBRA_URL}/v1/datapoint`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
+      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,
