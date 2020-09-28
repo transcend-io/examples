@@ -51,7 +51,7 @@ This is the URL of your Sombra gateway.
 
 - If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`.
 - If you are self-hosting Sombra, you assign this value.
-- If Transcend is hosting the gateway on your behalf in a single-tenant instance, it is at `https://<ORGANIZATION_URI>.sombra.transcend.io`.
+- If Transcend is hosting the gateway on your behalf in a single-tenant instance, this is `https://<ORGANIZATION_URI>.sombra.transcend.io`.
 
 ## Languages
 
