@@ -69,6 +69,7 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
     console.info(
       `Successfully responded to Enrichment webhook with ON_HOLD signal - https://app.transcend.io${req.body.extras.request.link}`,
     );
+    return null;
   }
 
   // Allow the request to proceed
