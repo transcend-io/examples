@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const {
   TRANSCEND_API_KEY,
   SOMBRA_API_KEY,
+  SOMBRA_URL,
 } = require('../constants');
 
 // Global to cache the webhook signing public key
