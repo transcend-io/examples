@@ -37,7 +37,7 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   const bulkUpload = got.post(`${SOMBRA_URL}/v1/data-silo`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
-      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
+      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,
@@ -52,7 +52,7 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   const fileUpload = got.stream.post(`${SOMBRA_URL}/v1/datapoint`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
-      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
+      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,

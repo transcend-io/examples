@@ -9,8 +9,11 @@ These examples are meant to show you what the integration will look like when yo
 Each language has an example of how to:
 
 - Verify a webhook that is sent from Transcend ([docs](https://docs.transcend.io/docs/receiving-webhooks))
-- How to perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
-- How to respond to ACCESS/ERASURE and other DSR webhooks ([docs](https://docs.transcend.io/docs/responding-to-dsrs))
+- Respond to ACCESS/ERASURE and other DSR webhooks ([docs](https://docs.transcend.io/docs/responding-to-dsrs))
+
+The JavaScript folder also has an example of how to:
+
+- Perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
 
 Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [datamap](https://app.transcend.io/data-map).
 
@@ -34,7 +37,7 @@ API keys must be scoped to certain operations or data silos.
 
 This API key authenticates you to to your Sombra gateway.
 
-- Typically, you don't need to set this.
+- If you're using multi-tenant Sombra (most common) you don't need to set this.
 - If you are self-hosting Sombra, you would have generated this at the time of setup and stored it securely.
 - If Transcend is hosting the gateway on your behalf in a single-tenant instance, you will receive this via a secure channel.
 

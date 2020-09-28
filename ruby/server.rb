@@ -111,6 +111,7 @@ def perform_access(user, nonce)
     }
 
     # Signal that it has been completed.
+    # TODO: make x-sombra-authorization optional in this example
     resp = Faraday.post($DATA_SILO_PATH) do |req|
         req.headers['Content-Type'] = 'application/json'
         req.headers['accept'] = 'application/json'
@@ -134,6 +135,7 @@ def perform_erasure(user, nonce)
     }
 
     # Signal that it has been completed.
+    # TODO: make x-sombra-authorization optional in this example
     resp = Faraday.put($DATA_SILO_PATH) do |req|
         req.headers['Content-Type'] = 'application/json'
         req.headers['accept'] = 'application/json'
@@ -145,6 +147,7 @@ def perform_erasure(user, nonce)
 end
 
 # Retrieve public key from Sombra
+# TODO: add authentication headers for multi-tenant Sombra in this example
 def transcend_public_key
     response = Faraday.get($PUBLIC_KEY_URL)
     OpenSSL::PKey.read(response.body)

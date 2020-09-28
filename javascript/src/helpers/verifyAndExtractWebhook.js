@@ -27,7 +27,7 @@ module.exports = async function verifyAndExtractWebhook(signedToken) {
         `${SOMBRA_URL}/public-keys/sombra-general-signing-key`, {
           headers: {
             authorization: `Bearer ${TRANSCEND_API_KEY}`,
-            'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : '',
+            'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
           },
         },
       );
