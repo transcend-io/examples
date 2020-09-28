@@ -1,10 +1,10 @@
 {
-    "cSpell.words": [
-        "datamap",
-        "sombra",
-        "venv",
-        "webhook",
-        "webhooks"
-    ],
-    "editor.formatOnSave": true
+  "cSpell.words": [
+    "datamap",
+    "sombra",
+    "venv",
+    "webhook",
+    "webhooks"
+  ],
+  "editor.formatOnSave": false
 }

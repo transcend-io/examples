@@ -7,4 +7,4 @@
 module.exports = async function checkIfFraudster(email) {
   const flag = email.split('@')[0].split('+')[1];
   return ['thefraudster', 'fraud', 'fraudster'].includes(flag);
-}
+};

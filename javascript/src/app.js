@@ -16,9 +16,7 @@ const handleEnrichmentWebhook = require('./handleEnrichmentWebhook');
 const handleDSRWebhook = require('./handleDSRWebhook');
 
 // Constants
-const {
-  PORT
-} = require('./constants');
+const { PORT } = require('./constants');
 
 // Set up the server
 const app = express();
@@ -40,18 +38,12 @@ app.use(bodyParser.json());
  * Receive webhook for identity enrichment (optional)
  * This path is set by you in the Admin Dashboard.
  */
-app.post(
-  '/transcend/enrichment',
-  handleEnrichmentWebhook,
-);
+app.post('/transcend/enrichment', handleEnrichmentWebhook);
 
 /*
  * Receive webhook (Transcend's notification to this server)
  * This path is set by you in the Admin Dashboard.
  */
-app.post(
-  '/transcend/new-dsr',
-  handleDSRWebhook,
-);
+app.post('/transcend/new-dsr', handleDSRWebhook);
 
 app.listen(port, () => console.info(`Example custom data silo listening on port ${port}.`));
