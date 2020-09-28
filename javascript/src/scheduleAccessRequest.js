@@ -2,30 +2,18 @@ const got = require('got');
 const fs = require('fs');
 const path = require('path');
 const stream = require('stream');
-const {
-  promisify
-} = require('util');
+const { promisify } = require('util');
 
 const pipeline = promisify(stream.pipeline);
 
 // Constants
-const {
-  TRANSCEND_API_KEY,
-  SOMBRA_API_KEY,
-  SOMBRA_URL,
-} = require('./constants');
+const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('./constants');
 
 // Helpers
-const {
-  lookUpUser,
-} = require('./helpers');
-
-//////////////////////
-// POST TO TRANSCND //
-//////////////////////
+const { lookUpUser } = require('./helpers');
 
 /**
- * Process an access request for this user
+ * Process an access request for this user and upload the result to Transcend
  */
 module.exports = async function scheduleAccessRequest(userIdentifier, nonce, requestLink) {
   console.info(`Uploading data - https://app.transcend.io${requestLink}`);
@@ -58,13 +46,10 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
       'user-agent': undefined,
       'x-transcend-datapoint-name': 'Movies',
       'x-transcend-profile-id': userIdentifier,
-    }
+    },
   });
 
-  const fileUploadPipeline = await pipeline(
-    readFile,
-    fileUpload,
-  );
+  const fileUploadPipeline = await pipeline(readFile, fileUpload);
 
   try {
     await Promise.all([bulkUpload, fileUploadPipeline]);
@@ -72,4 +57,4 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   } catch (error) {
     console.error(`Failed to upload data - https://app.transcend.io${requestLink}`);
   }
-}
+};

@@ -2,10 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 // Constants
-const {
-  ENRICHMENT_SIGNING_KEY,
-  ORGANIZATION_URI,
-} = require('../constants');
+const { ENRICHMENT_SIGNING_KEY, ORGANIZATION_URI } = require('../constants');
 
 // In this example, the signing key is stored as a base64-encoded env var
 const DECODED_ENRICHMENT_SIGNING_KEY = Buffer.from(ENRICHMENT_SIGNING_KEY, 'base64').toString();
@@ -19,11 +16,12 @@ module.exports = function createEnricherJwt(content) {
     // The content to sign
     content,
     // The private key for the enricher (you should have uploaded the public key)
-    DECODED_ENRICHMENT_SIGNING_KEY, {
+    DECODED_ENRICHMENT_SIGNING_KEY,
+    {
       algorithm: 'ES384',
       expiresIn: '1d',
       // organization URI from https://app.transcend.io/settings#OrganizationSettings
       audience: ORGANIZATION_URI,
-    }
-  )
+    },
+  );
 };

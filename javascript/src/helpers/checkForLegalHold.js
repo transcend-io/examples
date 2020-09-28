@@ -7,4 +7,4 @@
 module.exports = async function checkForLegalHold(email) {
   const flag = email.split('@')[0].split('+')[1];
   return ['legalhold'].includes(flag);
-}
+};

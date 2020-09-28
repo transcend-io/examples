@@ -3,11 +3,7 @@ const got = require('got');
 const jwt = require('jsonwebtoken');
 
 // Constants
-const {
-  TRANSCEND_API_KEY,
-  SOMBRA_API_KEY,
-  SOMBRA_URL,
-} = require('../constants');
+const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('../constants');
 
 // Global to cache the webhook signing public key
 let cachedPublicKey;
@@ -24,14 +20,12 @@ module.exports = async function verifyAndExtractWebhook(signedToken) {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
-      const response = await got.get(
-        `${SOMBRA_URL}/public-keys/sombra-general-signing-key`, {
-          headers: {
-            authorization: `Bearer ${TRANSCEND_API_KEY}`,
-            'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
-          },
+      const response = await got.get(`${SOMBRA_URL}/public-keys/sombra-general-signing-key`, {
+        headers: {
+          authorization: `Bearer ${TRANSCEND_API_KEY}`,
+          'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
         },
-      );
+      });
       cachedPublicKey = response.body;
     } catch (err) {
       console.error('Failed to get public key:', err);
@@ -44,4 +38,4 @@ module.exports = async function verifyAndExtractWebhook(signedToken) {
   });
 
   return signedBody;
-}
+};

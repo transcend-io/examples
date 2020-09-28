@@ -10,4 +10,4 @@ module.exports = {
   createEnricherJwt,
   lookUpUser,
   verifyAndExtractWebhook,
-}
+};
