@@ -1,14 +1,14 @@
 # examples
 
-Some examples of how to integrate with transcend in various languages. See [our documentation](https://docs.transcend.io/) for further information.
+Some examples of how to integrate with Transcend in various languages. See [our documentation](https://docs.transcend.io/) for further information.
 
 ## What are these examples
 
-These examples are meant to show you what the integration will look like when you connect your internal systems to transcend.
+These examples are meant to show you what the integration will look like when you connect your internal systems to Transcend.
 
 Each language has an example of how to:
 
-- Verify a webhook that is sent from transcend ([docs](https://docs.transcend.io/docs/receiving-webhooks))
+- Verify a webhook that is sent from Transcend ([docs](https://docs.transcend.io/docs/receiving-webhooks))
 - How to perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
 - How to respond to ACCESS/ERASURE and other DSR webhooks ([docs](https://docs.transcend.io/docs/responding-to-dsrs))
 
@@ -16,7 +16,7 @@ Using [ngrok](https://ngrok.com/) you can actually [connect these examples](http
 
 ## Try it in your environment
 
-To configure these example, you will need to create a file named `.env` and fill it out with your configuration
+To configure these examples, you will need to create a file named `.env` and fill it out with your configuration.
 
 ```sh
 TRANSCEND_API_KEY="<TODO>"
@@ -32,21 +32,22 @@ API keys must be scoped to certain operations or data silos.
 
 ### SOMBRA_API_KEY
 
-This API key authenticates you to to your sombra gateway.
+This API key authenticates you to to your Sombra gateway.
 
-- If you are self hosting sombra, you would have generated this at time of setup and stored it securely.
-- If transcend is hosting the gateway on your behalf, you should have received this via some secure channel
+- Typically, you don't need to set this.
+- If you are self-hosting Sombra, you would have generated this at the time of setup and stored it securely.
+- If Transcend is hosting the gateway on your behalf in a single-tenant instance, you will receive this via a secure channel.
 
 ### ORGANIZATION_URI
 
-This is the unique uri of your organization on transcend found [here](https://app.transcend.io/settings#OrganizationSettings).
+This is the unique URI of your organization on Transcend, found [here](https://app.transcend.io/settings#OrganizationSettings).
 
 ### SOMBRA_URL
 
-This is the URL of your sombra gateway.
+This is the URL of your Sombra gateway.
 
 - If you are self hosting, you assign this value
-- If transcend is hosting, it is often at `https://<ORGANIZATION_URI>.sombra.transcend.io`
+- If Transcend is hosting, it is often at `https://<ORGANIZATION_URI>.sombra.transcend.io`
 
 ## Languages
 
