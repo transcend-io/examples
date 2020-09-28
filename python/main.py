@@ -60,6 +60,7 @@ IS_A_FRAUD = {
 
 """
 Get the sombra public key, used to verify the coreIdentifier
+TODO: add authentication headers for multi-tenant Sombra in this example
 """
 def get_transcend_public_key():
     res = requests.get(SOMBRA_URL + '/public-keys/sombra-general-signing-key', verify = not TRUST_SELF_SIGNED_CERT)
@@ -88,6 +89,7 @@ def get_core_identifier(headers):
 
 """
 Construct the headers to respond to webhooks with
+TODO: make x-sombra-authorization optional in this example
 """
 def response_headers(response_jwt_token):
     return {
@@ -208,8 +210,8 @@ The main server runner
 def main():
     # Create https server
     httpd = HTTPServer(('localhost', 4443), SimpleHTTPRequestHandler)
-    httpd.socket = ssl.wrap_socket (httpd.socket, 
-            keyfile="ssl/private.key", 
+    httpd.socket = ssl.wrap_socket (httpd.socket,
+            keyfile="ssl/private.key",
             certfile='ssl/certificate.pem', server_side=True)
 
     # Run
