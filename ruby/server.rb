@@ -66,17 +66,18 @@ post '/' do
     token = request.env['HTTP_X_SOMBRA_TOKEN']
 
     begin
-        coreIdentifier = get_core_identifier token
+        validate_transcend_webhook token
         dsr_status = 'COMPILING'
+        user_identifier = payload['profile']['identifier']
 
 
-        if $IS_A_FRAUD[coreIdentifier]
+        if $IS_A_FRAUD[user_identifier]
             dsr_status = 'ON_HOLD'
-        elsif ! ($MOCK_DATA.key?(coreIdentifier))
+        elsif ! ($MOCK_DATA.key?(user_identifier))
             status 204
             dsr_status = 'NOT_FOUND'
         else
-            user = $MOCK_DATA[coreIdentifier]
+            user = $MOCK_DATA[user_identifier]
             case payload['type']
             when 'ACCESS'
                 perform_access(user, nonce)
@@ -154,8 +155,7 @@ def transcend_public_key
 end
 
 # Retrieve core identifier
-def get_core_identifier(token)
-    # A JWT that encodes the coreIdentifier like `{ "value": "12345" }`
+def validate_transcend_webhook(token)
     options = { aud: $ORGANIZATION_URI, verify_aud: true, algorithm: 'ES384' }
     decoded_token = JWT.decode token, transcend_public_key, $VERIFY_JWT, options
     decoded_token[0]['value']

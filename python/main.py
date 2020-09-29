@@ -59,7 +59,7 @@ IS_A_FRAUD = {
 ###########
 
 """
-Get the sombra public key, used to verify the coreIdentifier
+Get the sombra public key, used to verify the request
 TODO: add authentication headers for multi-tenant Sombra in this example
 """
 def get_transcend_public_key():
@@ -69,8 +69,7 @@ def get_transcend_public_key():
 """
 Validate the sombra token and get the verified core identifer
 """
-def get_core_identifier(headers):
-    # A JWT that encodes the coreIdentifier like `{ "value": "12345" }`
+def verify_transcend_webhook(headers):
     token = headers.get('x-sombra-token')  # Contains a signed user_id
 
     # Decode the jwt
@@ -177,16 +176,18 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         body = json.loads(body_str)
 
         # Verify that the request came from Transcend
-        coreIdentifier = get_core_identifier(self.headers)
+        verify_transcend_webhook(self.headers)
+
+        userIdentifier = body['profile']['identifier']
 
         # Determine whether the request should be blocked
         status = 'COMPILING'
-        if IS_A_FRAUD[coreIdentifier]:
+        if IS_A_FRAUD[userIdentifier]:
             status = 'ON_HOLD'
             # status = 'CANCELED'
 
         # Return 400 if user not found
-        if coreIdentifier not in MOCK_DATA:
+        if userIdentifier not in MOCK_DATA:
             self.send_response(400)
             self.end_headers()
             response = io.BytesIO()
@@ -201,7 +202,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(response.getvalue())
 
         # Process request async
-        process = Thread(target=process_dsr, args=[body, MOCK_DATA[coreIdentifier], self.headers['x-transcend-nonce']])
+        process = Thread(target=process_dsr, args=[body, MOCK_DATA[userIdentifier], self.headers['x-transcend-nonce']])
         process.start()
 
 """

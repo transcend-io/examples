@@ -13,7 +13,7 @@ let cachedPublicKey;
  *
  * Transcend developers: A design choice was made not to put webhook verification on an Express middleware. It's a nice refactor, but it can be esoteric to readers.
  *
- * @param {string} signedToken - the JSON Web Token asymetrically signed with ES384.
+ * @param {string} signedToken - the JSON Web Token asymmetrically signed with ES384.
  * @returns {Object} - the signed body
  */
 module.exports = async function verifyAndExtractWebhook(signedToken) {
