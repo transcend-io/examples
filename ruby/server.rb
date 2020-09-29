@@ -68,7 +68,7 @@ post '/' do
     begin
         validate_transcend_webhook token
         dsr_status = 'COMPILING'
-        user_identifier = payload['profile']['identifier']
+        user_identifier = payload['extras']['profile']['identifier']
 
 
         if $IS_A_FRAUD[user_identifier]

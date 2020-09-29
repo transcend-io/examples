@@ -178,7 +178,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         # Verify that the request came from Transcend
         verify_transcend_webhook(self.headers)
 
-        userIdentifier = body['profile']['identifier']
+        userIdentifier = body['extras']['profile']['identifier']
 
         # Determine whether the request should be blocked
         status = 'COMPILING'

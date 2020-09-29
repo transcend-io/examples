@@ -21,7 +21,7 @@ module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
   console.info(`Received DSR webhook - https://app.transcend.io${req.body.extras.request.link}`);
 
   // Extract metadata from the webhook
-  const userIdentifier = req.body.profile.identifier; // req.body.profile.type will tell you if this is an email vs username, vs other identifier
+  const userIdentifier = req.body.extras.profile.identifier; // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
   const nonce = req.headers['x-transcend-nonce'];
 
