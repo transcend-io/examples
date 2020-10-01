@@ -25,9 +25,7 @@ TRANSCEND_API_KEY = '4ff241e61c60288babed50097aab17eb38d97face63ac06923da85345f8
 SOMBRA_API_KEY = 'jC1VbtN9eQ3r+eQHVK9UVILPQn76GOW65HrVUsBYl/I='
 
 # The url of the sombra instance
-# SOMBRA_URL = 'https://patreon.sombra.transcend.io'
-SOMBRA_URL = 'https://patreon.sombra.dev.transcen.dental'
-# SOMBRA_URL = 'https://localhost:5040'
+SOMBRA_URL = 'https://multi-tenant.sombra.transcend.io'
 
 # The url to respond to webhooks with
 TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'

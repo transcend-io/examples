@@ -15,7 +15,7 @@ The JavaScript folder also has an example of how to:
 
 - Perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
 
-Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [datamap](https://app.transcend.io/data-map).
+Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [Data Map](https://app.transcend.io/data-map).
 
 ## Try it in your environment
 

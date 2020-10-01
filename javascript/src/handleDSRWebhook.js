@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 
 // Helpers
-const { verifyAndExtractWebhook } = require('./helpers');
+const { verifyWebhook } = require('./helpers');
 
 const scheduleAccessRequest = require('./scheduleAccessRequest');
 
@@ -12,7 +12,7 @@ const scheduleAccessRequest = require('./scheduleAccessRequest');
 module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
-    await verifyAndExtractWebhook(req.headers['x-sombra-token']);
+    await verifyWebhook(req.headers['x-sombra-token']);
   } catch (error) {
     // If the webhook doesn't pass verification, reject it.
     return res.status(401).send('You are not Transcend!');
@@ -20,7 +20,7 @@ module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
 
   console.info(`Received DSR webhook - https://app.transcend.io${req.body.extras.request.link}`);
 
-  // Extract metadata from the webhook
+  // Extract metadata from the body
   const userIdentifier = req.body.extras.profile.identifier; // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
   const nonce = req.headers['x-transcend-nonce'];

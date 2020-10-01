@@ -16,7 +16,7 @@ let cachedPublicKey;
  * @param {string} signedToken - the JSON Web Token asymmetrically signed with ES384.
  * @returns {Object} - the signed body
  */
-module.exports = async function verifyAndExtractWebhook(signedToken) {
+module.exports = async function verifyWebhook(signedToken) {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
@@ -33,9 +33,7 @@ module.exports = async function verifyAndExtractWebhook(signedToken) {
   }
 
   // Verify webhook signature with the public key (ensures that Transcend sent the request)
-  const signedBody = jwt.verify(signedToken, cachedPublicKey, {
+  return jwt.verify(signedToken, cachedPublicKey, {
     algorithms: ['ES384'],
   });
-
-  return signedBody;
 };

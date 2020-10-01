@@ -1,9 +1,4 @@
-const {
-  TRANSCEND_API_KEY,
-  SOMBRA_API_KEY,
-  SOMBRA_URL,
-  PORT,
-} = process.env;
+const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, PORT } = process.env;
 
 module.exports = {
   TRANSCEND_API_KEY,
