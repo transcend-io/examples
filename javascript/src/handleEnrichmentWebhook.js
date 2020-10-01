@@ -2,11 +2,11 @@ const asyncHandler = require('express-async-handler');
 
 // Helpers
 const {
-  createEnricherJwt,
   checkIfFraudster,
   checkForLegalHold,
   verifyAndExtractWebhook,
 } = require('./helpers');
+const scheduleEnricher = require('./scheduleEnricher')
 
 /**
  * Enrichment webhook handler.
@@ -26,28 +26,11 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
     `Received Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`,
   );
 
-  // Add new identifers
-  const signedRequestIdentifiers = {
-    email: [
-      createEnricherJwt({
-        value: 'test+enriched@transcend.io',
-      }),
-      createEnricherJwt({
-        value: 'test+access@transcend.io',
-      }),
-    ],
-    phone: [
-      createEnricherJwt({
-        countryCode: 'US',
-        number: '+18609066012',
-      }),
-    ],
-  };
-
   // Check if we should place a hold on this request
   const requestIdentifier = signedBody.value;
   const isFraudster = await checkIfFraudster(requestIdentifier);
   const hasLegalHold = await checkForLegalHold(requestIdentifier);
+  const nonce = req.headers['x-transcend-nonce'];
 
   // In this case, we are automatically cancelling requests from fraudsters.
   if (isFraudster) {
@@ -71,11 +54,13 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
     );
     return null;
   }
+  
 
-  // Allow the request to proceed
-  res.json({
-    signedRequestIdentifiers,
-  });
+  // Schedule the enrichment job
+  scheduleEnricher(requestIdentifier, nonce, req.body.extras.request.link);
+
+  // Indicate we got the webhook
+  res.status(200).send();
 
   console.info(
     `Successfully responded to Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`,

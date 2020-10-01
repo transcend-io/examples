@@ -32,9 +32,6 @@ SOMBRA_URL = 'https://patreon.sombra.dev.transcen.dental'
 # The url to respond to webhooks with
 TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
 
-# The JWT audience
-ORGANIZATION_URI="patreon"
-
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always
 VERIFY_JWT = True
 
@@ -78,7 +75,6 @@ def verify_transcend_webhook(headers):
             bytes(token, 'utf-8'),
             get_transcend_public_key(),
             algorithms=['ES384'],
-            audience=ORGANIZATION_URI,
             verify=VERIFY_JWT,  # Only validate in prod where the tokens are real
         )
         return decoded.get('value')

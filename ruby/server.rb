@@ -19,9 +19,6 @@ $SOMBRA_API_KEY = ENV["SOMBRA_API_KEY"]
 # The url of the sombra instance
 $SOMBRA_URL = ENV["SOMBRA_URL"]
 
-# The JWT audience
-$ORGANIZATION_URI=ENV["ORGANIZATION_URI"]
-
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always -- in production you should always verify the JWT
 $VERIFY_JWT = true
 
@@ -156,7 +153,7 @@ end
 
 # Retrieve core identifier
 def validate_transcend_webhook(token)
-    options = { aud: $ORGANIZATION_URI, verify_aud: true, algorithm: 'ES384' }
+    options = { algorithm: 'ES384' }
     decoded_token = JWT.decode token, transcend_public_key, $VERIFY_JWT, options
     decoded_token[0]['value']
 end
