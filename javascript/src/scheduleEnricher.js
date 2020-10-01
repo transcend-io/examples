@@ -4,16 +4,16 @@ const got = require('got');
 const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('./constants');
 
 // Helpers
-const { lookUpUser } = require('./helpers');
+const { enricherUser } = require('./helpers');
 
 /**
  * Process an enrichment request
  */
 module.exports = async function scheduleEnricher(userIdentifier, nonce, requestLink) {
-  console.info(`Uploading data - https://app.transcend.io${requestLink}`);
+  console.info(`Enriching identity - https://app.transcend.io${requestLink}`);
 
   // Find user data
-  const identifiers = await lookUpUser(userIdentifier);
+  const identifiers = await enricherUser(userIdentifier);
   try {
     // Respond with enriched values
     await got.post(`${SOMBRA_URL}/v1/enrich-identifiers`, {
