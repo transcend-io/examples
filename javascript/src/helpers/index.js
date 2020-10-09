@@ -1,13 +1,13 @@
 const checkForLegalHold = require('./checkForLegalHold');
 const checkIfFraudster = require('./checkIfFraudster');
-const createEnricherJwt = require('./createEnricherJwt');
 const lookUpUser = require('./lookUpUser');
-const verifyAndExtractWebhook = require('./verifyAndExtractWebhook');
+const enrichUser = require('./enrichUser');
+const verifyWebhook = require('./verifyWebhook');
 
 module.exports = {
   checkForLegalHold,
   checkIfFraudster,
-  createEnricherJwt,
   lookUpUser,
-  verifyAndExtractWebhook,
+  enrichUser,
+  verifyWebhook,
 };

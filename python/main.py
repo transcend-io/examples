@@ -25,15 +25,10 @@ TRANSCEND_API_KEY = '4ff241e61c60288babed50097aab17eb38d97face63ac06923da85345f8
 SOMBRA_API_KEY = 'jC1VbtN9eQ3r+eQHVK9UVILPQn76GOW65HrVUsBYl/I='
 
 # The url of the sombra instance
-# SOMBRA_URL = 'https://patreon.sombra.transcend.io'
-SOMBRA_URL = 'https://patreon.sombra.dev.transcen.dental'
-# SOMBRA_URL = 'https://localhost:5040'
+SOMBRA_URL = 'https://multi-tenant.sombra.transcend.io'
 
 # The url to respond to webhooks with
 TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
-
-# The JWT audience
-ORGANIZATION_URI="patreon"
 
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always
 VERIFY_JWT = True
@@ -78,7 +73,6 @@ def verify_transcend_webhook(headers):
             bytes(token, 'utf-8'),
             get_transcend_public_key(),
             algorithms=['ES384'],
-            audience=ORGANIZATION_URI,
             verify=VERIFY_JWT,  # Only validate in prod where the tokens are real
         )
         return decoded.get('value')

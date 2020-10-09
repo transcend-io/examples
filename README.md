@@ -15,7 +15,7 @@ The JavaScript folder also has an example of how to:
 
 - Perform identity enrichment by responding to a webhook ([docs](https://docs.transcend.io/docs/identity-enrichment))
 
-Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [datamap](https://app.transcend.io/data-map).
+Using [ngrok](https://ngrok.com/) you can actually [connect these examples](https://app.transcend.io/data-map/silos?integrationName=server) to your [Data Map](https://app.transcend.io/data-map).
 
 ## Try it in your environment
 
@@ -24,7 +24,6 @@ To configure these examples, you will need to create a file named `.env` and fil
 ```sh
 TRANSCEND_API_KEY="<TODO>"
 SOMBRA_API_KEY="<TODO>"
-ORGANIZATION_URI="<TODO>"
 SOMBRA_URL="https://<TODO>.sombra.transcend.io"
 ```
 
@@ -40,10 +39,6 @@ This API key authenticates you to to your Sombra gateway.
 - If you're using multi-tenant Sombra (most common) you don't need to set this.
 - If you are self-hosting Sombra, you would have generated this at the time of setup and stored it securely.
 - If Transcend is hosting the gateway on your behalf in a single-tenant instance, you will receive this via a secure channel.
-
-### ORGANIZATION_URI
-
-This is the unique URI of your organization on Transcend, found [here](https://app.transcend.io/settings#OrganizationSettings).
 
 ### SOMBRA_URL
 
