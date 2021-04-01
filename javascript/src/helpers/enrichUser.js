@@ -14,7 +14,7 @@ module.exports = async function enrichUser(/* userIdentifier */) {
     phone: [
       {
         countryCode: 'US',
-        number: '+16126883289',
+        value: '+16126883289',
       },
     ],
     // googleAnalyticsInternalId: [
