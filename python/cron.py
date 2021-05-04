@@ -3,14 +3,25 @@ import json
 """
 API key scoped to the data silo: https://app.transcend.io/settings#Developer
 """
-TRANSCEND_API_KEY = "004174df4cb8f902632667b4ce471ade18c11782b7e5e7453fc4e490e2b1d52e"
+TRANSCEND_API_KEY = "TODO"
+
+"""
+DSR action to process. See event keys here: https://docs.transcend.io/docs/data-subject-requests#data-actions
+"""
+ACTION_TYPE ="ERASURE"
+
+"""
+ID of the data silo to process (found in the URL https://app.transcend.io/data-map/silo/<data-silo-id>)
+"""
+DATA_SILO_ID = "999b3022-5aed-4615-9f7e-cd7dce950ad7"
+
 """
 Headers used to authenticate to sombra and transcend
 """
 headers = {
     "Authorization": "Bearer " + TRANSCEND_API_KEY,
 }
-SOMBRA_URL = "https://yo.com:5046" # "https://api.transcend.io"
+SOMBRA_URL = "https://api.transcend.io"
 
 """
   List out requests that need to be processed for a particular data silos/action combination
