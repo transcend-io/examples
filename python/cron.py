@@ -13,7 +13,7 @@ ACTION_TYPE ="ERASURE"
 """
 ID of the data silo to process (found in the URL https://app.transcend.io/data-map/silo/<data-silo-id>)
 """
-DATA_SILO_ID = "999b3022-5aed-4615-9f7e-cd7dce950ad7"
+DATA_SILO_ID = "TODO"
 
 """
 Headers used to authenticate to sombra and transcend
@@ -71,13 +71,12 @@ def run_job(identifier, actionType):
 
 
 def main():
-    action_type ='SALE_OPT_OUT'
 
     while True:
-        results = list_pending_requests('999b3022-5aed-4615-9f7e-cd7dce950ad7', action_type)
+        results = list_pending_requests(DATA_SILO_ID, ACTION_TYPE)
         print("Processing: {} requests".format(len(results)))
         for result in results:
-            run_job(result['identifier'], action_type)
+            run_job(result['identifier'], ACTION_TYPE)
             notify_compelted(result['identifier'], result['nonce'])
         
         if len(results) == 0:
