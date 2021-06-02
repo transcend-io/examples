@@ -31,7 +31,7 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
   // In this case, we are automatically cancelling requests from fraudsters.
   if (isFraudster) {
     res.json({
-      status: 'CANCELED',
+      status: 'CANCELED', templateId: 'ee54169a-9a87-4e93-aa2d-be733cce9113',
     });
     console.info(
       `Successfully responded to Enrichment webhook with CANCELED signal - https://app.transcend.io${req.body.extras.request.link}`,
