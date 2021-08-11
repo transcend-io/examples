@@ -21,7 +21,7 @@ Headers used to authenticate to sombra and transcend
 headers = {
     "Authorization": "Bearer " + TRANSCEND_API_KEY,
 }
-SOMBRA_URL = "https://api.transcend.io"
+SOMBRA_URL = "https://sombra.transcend.io"
 
 """
   List out requests that need to be processed for a particular data silos/action combination
