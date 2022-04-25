@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Ruby](#ruby)
+  - [Installation](#installation)
+  - [Start](#start)
+  - [Open the browser](#open-the-browser)
+  - [Add to your Data Map](#add-to-your-data-map)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Ruby
 
 Internal system integrations in Ruby. Check out the parent [README](../README.md) for more context.

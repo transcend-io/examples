@@ -1,9 +1,11 @@
-# Pull Request
-
-## Related Github Issues
+## Related Issues
 
 - _[none]_
 
-## Description
+## Security Implications
 
-TODO
+_[none]_
+
+## System Availability
+
+_[none]_

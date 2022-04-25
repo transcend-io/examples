@@ -1,7 +1,10 @@
 /**
  * Look inside a database and return the person's user profiles
+ *
+ * @param userIdentifier - User identifier to lookup
+ * @returns User data
  */
-module.exports = async function lookUpUser(userIdentifier) {
+module.exports = function lookUpUser(userIdentifier) {
   return [
     {
       profileId: userIdentifier,

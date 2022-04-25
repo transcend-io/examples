@@ -2,14 +2,17 @@ const asyncHandler = require('express-async-handler');
 
 // Helpers
 const { verifyWebhook } = require('./helpers');
+const { logger } = require('./logger');
 
 const scheduleAccessRequest = require('./scheduleAccessRequest');
 
 /**
  * DSR webhook handler
  * Receives the DSR notification and schedules an async job.
+ *
+ * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
+module.exports = asyncHandler(async (req, res) => {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
@@ -18,10 +21,11 @@ module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
     return res.status(401).send('You are not Transcend!');
   }
 
-  console.info(`Received DSR webhook - https://app.transcend.io${req.body.extras.request.link}`);
+  logger.info(`Received DSR webhook - ${req.body.extras.request.link}`);
 
   // Extract metadata from the body
-  const userIdentifier = req.body.extras.profile.identifier; // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
+  // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
+  const userIdentifier = req.body.extras.profile.identifier;
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
   const nonce = req.headers['x-transcend-nonce'];
 
@@ -29,7 +33,11 @@ module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
   switch (webhookType) {
     case 'ACCESS':
       // Schedule the job to run. Results of the job are sent to Transcend separately (in a different HTTP request, in case the job is slow).
-      scheduleAccessRequest(userIdentifier, nonce, req.body.extras.request.link);
+      scheduleAccessRequest(
+        userIdentifier,
+        nonce,
+        req.body.extras.request.link,
+      );
 
       // Respond OK - webhook received properly.
       res.sendStatus(200);
@@ -42,14 +50,16 @@ module.exports = asyncHandler(async function handleDSRWebhook(req, res) {
       break;
 
     default:
-      console.warn(
-        `This type of DSR webhook is unimplemented - https://app.transcend.io${req.body.extras.request.link}`,
+      logger.warn(
+        `This type of DSR webhook is unimplemented - ${req.body.extras.request.link}`,
       );
-      return res.status(400).send('This type of privacy request is unimplemented.');
+      return res
+        .status(400)
+        .send('This type of privacy request is unimplemented.');
   }
 
-  console.info(
-    `Successfully responded to DSR webhook - https://app.transcend.io${req.body.extras.request.link}`,
+  logger.info(
+    `Successfully responded to DSR webhook - ${req.body.extras.request.link}`,
   );
 
   return null;

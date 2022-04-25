@@ -7,7 +7,6 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "ngrok": "ngrok http 8081",
-    "lint": "eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Transcend Inc.",
@@ -22,12 +21,6 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "eslint": "^7.9.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-prettier": "^3.1.4",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.1.2"
+    "nodemon": "^2.0.4"
   }
 }

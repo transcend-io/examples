@@ -1,0 +1,30 @@
+name: ci
+on: push
+
+jobs:
+  run-depcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: yarn install --immutable
+      - run: yarn depcheck
+
+  run-pre-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100 # need the history to do a changed files check below (source, origin)
+      - uses: actions/setup-python@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: yarn install --immutable
+      - uses: pre-commit/action@v2.0.2
+        with:
+          extra_args: --source ${{ github.event.pull_request.base.sha || 'HEAD~1' }} --origin ${{ github.event.pull_request.head.sha || 'HEAD' }}
