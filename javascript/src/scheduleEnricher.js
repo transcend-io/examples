@@ -1,16 +1,29 @@
 const got = require('got');
 
 // Constants
-const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('./constants');
+const {
+  TRANSCEND_API_KEY,
+  SOMBRA_API_KEY,
+  SOMBRA_URL,
+} = require('./constants');
+const { logger } = require('./logger');
 
 // Helpers
 const { enrichUser } = require('./helpers');
 
 /**
  * Process an enrichment request - turn one identifier into many
+ *
+ * @param userIdentifier - User identifier
+ * @param nonce - Nonce to respond with
+ * @param requestLink - Link to request
  */
-module.exports = async function scheduleEnricher(userIdentifier, nonce, requestLink) {
-  console.info(`Enriching identity - https://app.transcend.io${requestLink}`);
+module.exports = async function scheduleEnricher(
+  userIdentifier,
+  nonce,
+  requestLink,
+) {
+  logger.info(`Enriching identity - ${requestLink}`);
 
   // Find user data
   const identifiers = await enrichUser(userIdentifier);
@@ -20,7 +33,9 @@ module.exports = async function scheduleEnricher(userIdentifier, nonce, requestL
     await got.post(`${SOMBRA_URL}/v1/enrich-identifiers`, {
       headers: {
         authorization: `Bearer ${TRANSCEND_API_KEY}`,
-        'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
+        'x-sombra-authorization': SOMBRA_API_KEY
+          ? `Bearer ${SOMBRA_API_KEY}`
+          : undefined,
         'x-transcend-nonce': nonce,
         accept: 'application/json',
         'user-agent': undefined,
@@ -30,8 +45,8 @@ module.exports = async function scheduleEnricher(userIdentifier, nonce, requestL
       },
     });
 
-    console.info(`Successfully enriched user - https://app.transcend.io${requestLink}`);
+    logger.info(`Successfully enriched user -${requestLink}`);
   } catch (error) {
-    console.error(`Failed to enriched user - https://app.transcend.io${requestLink}`);
+    logger.error(`Failed to enriched user -${requestLink}`);
   }
 };

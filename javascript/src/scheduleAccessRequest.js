@@ -7,16 +7,29 @@ const { promisify } = require('util');
 const pipeline = promisify(stream.pipeline);
 
 // Constants
-const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } = require('./constants');
-
+const {
+  TRANSCEND_API_KEY,
+  SOMBRA_API_KEY,
+  SOMBRA_URL,
+  MEDIA_FOLDER,
+} = require('./constants');
+const { logger } = require('./logger');
 // Helpers
 const { lookUpUser } = require('./helpers');
 
 /**
  * Process an access request for this user and upload the result to Transcend
+ *
+ * @param userIdentifier - User identifier
+ * @param nonce - Nonce to respond with
+ * @param requestLink - Link to request
  */
-module.exports = async function scheduleAccessRequest(userIdentifier, nonce, requestLink) {
-  console.info(`Uploading data - https://app.transcend.io${requestLink}`);
+module.exports = async function scheduleAccessRequest(
+  userIdentifier,
+  nonce,
+  requestLink,
+) {
+  logger.info(`Uploading data - ${requestLink}`);
 
   // Find user data
   const userData = await lookUpUser(userIdentifier);
@@ -25,7 +38,9 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   const bulkUpload = got.post(`${SOMBRA_URL}/v1/data-silo`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
-      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
+      'x-sombra-authorization': SOMBRA_API_KEY
+        ? `Bearer ${SOMBRA_API_KEY}`
+        : undefined,
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,
@@ -36,11 +51,15 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
   });
 
   // Upload a file to a datapoint
-  const readFile = fs.createReadStream(path.join(__dirname, 'media/big_buck_bunny.mp4'));
+  const readFile = fs.createReadStream(
+    path.join(MEDIA_FOLDER, 'big_buck_bunny.mp4'),
+  );
   const fileUpload = got.stream.post(`${SOMBRA_URL}/v1/datapoint`, {
     headers: {
       authorization: `Bearer ${TRANSCEND_API_KEY}`,
-      'x-sombra-authorization': SOMBRA_API_KEY ? `Bearer ${SOMBRA_API_KEY}` : undefined,
+      'x-sombra-authorization': SOMBRA_API_KEY
+        ? `Bearer ${SOMBRA_API_KEY}`
+        : undefined,
       'x-transcend-nonce': nonce,
       accept: 'application/json',
       'user-agent': undefined,
@@ -53,8 +72,8 @@ module.exports = async function scheduleAccessRequest(userIdentifier, nonce, req
 
   try {
     await Promise.all([bulkUpload, fileUploadPipeline]);
-    console.info(`Successfully uploaded data - https://app.transcend.io${requestLink}`);
+    logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
-    console.error(`Failed to upload data - https://app.transcend.io${requestLink}`);
+    logger.error(`Failed to upload data - ${requestLink}`);
   }
 };

@@ -1,14 +1,19 @@
 const asyncHandler = require('express-async-handler');
 
 // Helpers
-const { checkIfFraudster, checkForLegalHold, verifyWebhook } = require('./helpers');
+const {
+  checkIfFraudster,
+  checkForLegalHold,
+  verifyWebhook,
+} = require('./helpers');
+const { logger } = require('./logger');
 const scheduleEnricher = require('./scheduleEnricher');
 
 /**
  * Enrichment webhook handler.
  * Checks for fraud/legal holds and returns extra identifiers.
  */
-module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
+module.exports = asyncHandler(async (req, res) => {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
@@ -17,9 +22,7 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
     return res.status(401).send('You are not Transcend!');
   }
 
-  console.info(
-    `Received Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`,
-  );
+  logger.info(`Received Enrichment webhook - ${req.body.extras.request.link}`);
 
   // Extract metadata from the body
   const requestIdentifier = req.body.requestIdentifier.value;
@@ -31,10 +34,11 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
   // In this case, we are automatically cancelling requests from fraudsters.
   if (isFraudster) {
     res.json({
-      status: 'CANCELED', templateId: 'ee54169a-9a87-4e93-aa2d-be733cce9113',
+      status: 'CANCELED',
+      templateId: 'ee54169a-9a87-4e93-aa2d-be733cce9113',
     });
-    console.info(
-      `Successfully responded to Enrichment webhook with CANCELED signal - https://app.transcend.io${req.body.extras.request.link}`,
+    logger.info(
+      `Successfully responded to Enrichment webhook with CANCELED signal - ${req.body.extras.request.link}`,
     );
     return null;
   }
@@ -44,8 +48,8 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
     res.json({
       status: 'ON_HOLD',
     });
-    console.info(
-      `Successfully responded to Enrichment webhook with ON_HOLD signal - https://app.transcend.io${req.body.extras.request.link}`,
+    logger.info(
+      `Successfully responded to Enrichment webhook with ON_HOLD signal - ${req.body.extras.request.link}`,
     );
     return null;
   }
@@ -57,8 +61,8 @@ module.exports = asyncHandler(async function handleEnrichmentWebhook(req, res) {
   // Indicate we got the webhook
   res.status(200).send();
 
-  console.info(
-    `Successfully responded to Enrichment webhook - https://app.transcend.io${req.body.extras.request.link}`,
+  logger.info(
+    `Successfully responded to Enrichment webhook - ${req.body.extras.request.link}`,
   );
 
   return null;
