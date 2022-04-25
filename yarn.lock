@@ -303,7 +303,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@transcend-io/examples@workspace:."
   dependencies:
-    "@types/yargs-parser": ^20.2.1
     "@typescript-eslint/eslint-plugin": ^5.12.1
     "@typescript-eslint/parser": ^5.12.1
     "@yarnpkg/pnpify": ^3.1.1
@@ -424,13 +423,6 @@ __metadata:
   version: 1.0.0
   resolution: "@types/treeify@npm:1.0.0"
   checksum: 1b2397030d13beee7f82b878ca80feeddb0d550a6b00d8be30082a370c0ac5985ecf7b9378cf93ea278ff00c3e900b416ae8d9379f2c7e8caecdece1dfc77380
-  languageName: node
-  linkType: hard
-
-"@types/yargs-parser@npm:^20.2.1":
-  version: 20.2.2
-  resolution: "@types/yargs-parser@npm:20.2.2"
-  checksum: f5a57ba32b624e577c3c8c38c5dbf4531b92787b9323c15154232a083d2c6654d00df4ce8330bf048920775528d3162eddaa36429f746de0043eb34234acf4fd
   languageName: node
   linkType: hard
 
