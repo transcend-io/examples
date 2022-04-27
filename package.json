@@ -9,11 +9,6 @@
     "url": "https://github.com/transcend-io/examples.git"
   },
   "license": "MIT",
-  "main": "build/index",
-  "files": [
-    "build/**/*",
-    "package.json"
-  ],
   "scripts": {
     "update:sdks": "yarn set version from sources && yarn sdks base",
     "update:deps": "yarn upgrade-interactive && yarn update:sdks",
