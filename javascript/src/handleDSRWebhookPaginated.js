@@ -42,8 +42,9 @@ async function scheduleAccessChunkedRequest(
   try {
     let hasMore = true;
     let offset = 0;
-    const PAGE_SIZE = 500; // set this as high as you can without overwhelming your database
+    const PAGE_SIZE = 300; // set this as high as you can without overwhelming your database
 
+    let i = 0;
     while (hasMore) {
       const data = await MockDatabaseModel.findAll({
         where: { userId: userIdentifier },
@@ -52,7 +53,6 @@ async function scheduleAccessChunkedRequest(
         offset,
       });
       hasMore = data.length === PAGE_SIZE;
-      offset += PAGE_SIZE;
       await got.post({
         url: `${SOMBRA_URL}/v1/datapoint-chunked`,
         headers: {
@@ -64,15 +64,19 @@ async function scheduleAccessChunkedRequest(
           'content-type': 'application/json',
         },
         json: {
+          fileId: `Page ${i} -- ${offset} - ${offset + data.length}`,
           dataPointName: 'friends',
           data,
           isLastPage: !hasMore,
         },
       });
+      offset += PAGE_SIZE;
+      i += 1;
+      logger.info(`Sent page ${i}`);
     }
     logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
-    logger.error(`Failed to upload data - ${requestLink}`);
+    logger.error(`Failed to upload data - ${requestLink} - ${error.message}`);
   }
 }
 
