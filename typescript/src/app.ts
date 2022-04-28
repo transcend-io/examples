@@ -5,21 +5,26 @@
  */
 
 // Load environment variables
-require('dotenv').config();
-
 // Libraries
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+import express from 'express';
+
+import bodyParser from 'body-parser';
+
+import morgan from 'morgan';
 
 // Load webhook handling middlewares
-const handleEnrichmentWebhook = require('./handleEnrichmentWebhook');
-const handleDSRWebhook = require('./handleDSRWebhook');
-const handleDSRWebhookPaginated = require('./handleDSRWebhookPaginated');
+import handleEnrichmentWebhook from './handleEnrichmentWebhook';
+
+import handleDSRWebhook from './handleDSRWebhook';
+
+import handleDSRWebhookPaginated from './handleDSRWebhookPaginated';
 
 // Constants
-const { PORT } = require('./constants');
-const { logger } = require('./logger');
+import { PORT } from './constants';
+
+import logger from './logger';
+
+require('dotenv').config();
 
 // Set up the server
 const app = express();

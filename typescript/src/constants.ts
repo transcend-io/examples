@@ -1,4 +1,4 @@
-const path = require('path');
+import path = require('path');
 
 const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, PORT } = process.env;
 
