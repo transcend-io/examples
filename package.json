@@ -18,7 +18,8 @@
     "prepublish": "yarn build"
   },
   "workspaces": [
-    "javascript"
+    "javascript",
+    "typescript"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.12.1",

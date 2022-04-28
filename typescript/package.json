@@ -1,12 +1,11 @@
 {
-  "name": "eshopit",
+  "name": "typescript-eshopit",
   "version": "1.0.0",
   "description": "Example of an application integrated with Transcend.",
-  "main": "src/app.js",
+  "main": "src/app.ts",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
-    "ngrok": "ngrok http 8081",
+    "build": "tsc src/app.ts",
+    "start": "node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Transcend Inc.",
