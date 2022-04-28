@@ -15,7 +15,7 @@ const scheduleAccessRequest = require('./scheduleAccessRequest');
  * @param res - response object
  * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-export async function asyncHandler(req: Request, res: Response): Promise<> {
+export async function asyncHandler(req: Request, res: Response): Promise<void> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);

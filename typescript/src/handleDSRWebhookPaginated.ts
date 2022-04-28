@@ -37,7 +37,7 @@ async function scheduleAccessChunkedRequest(
   userIdentifier: string,
   nonce: string,
   requestLink: string,
-): any {
+): Promise<void> {
   logger.info(`Uploading data - ${requestLink}`);
   try {
     let hasMore = true;
