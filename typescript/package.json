@@ -1,0 +1,26 @@
+{
+  "name": "eshopit",
+  "version": "1.0.0",
+  "description": "Example of an application integrated with Transcend.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "ngrok": "ngrok http 8081",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Transcend Inc.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "got": "^11.6.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
