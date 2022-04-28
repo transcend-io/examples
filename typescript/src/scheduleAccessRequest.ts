@@ -1,21 +1,26 @@
-const got = require('got');
-const fs = require('fs');
-const path = require('path');
-const stream = require('stream');
-const { promisify } = require('util');
+import got from 'got';
 
-const pipeline = promisify(stream.pipeline);
+import fs from 'fs';
+
+import path from 'path';
+
+import stream from 'stream';
+
+import { promisify } from 'util';
 
 // Constants
-const {
+import {
   TRANSCEND_API_KEY,
   SOMBRA_API_KEY,
   SOMBRA_URL,
   MEDIA_FOLDER,
-} = require('./constants');
-const { logger } = require('./logger');
+} from './constants';
+
+import { logger } from './logger';
 // Helpers
-const { lookUpUser } = require('./helpers');
+import { lookUpUser } from './helpers';
+
+const pipeline = promisify(stream.pipeline);
 
 /**
  * Process an access request for this user and upload the result to Transcend
@@ -24,11 +29,11 @@ const { lookUpUser } = require('./helpers');
  * @param nonce - Nonce to respond with
  * @param requestLink - Link to request
  */
-module.exports = async function scheduleAccessRequest(
-  userIdentifier,
-  nonce,
-  requestLink,
-) {
+export async function scheduleAccessRequest(
+  userIdentifier: string,
+  nonce: string,
+  requestLink: string,
+): Promise<void> {
   logger.info(`Uploading data - ${requestLink}`);
 
   // Find user data
@@ -76,4 +81,4 @@ module.exports = async function scheduleAccessRequest(
   } catch (error) {
     logger.error(`Failed to upload data - ${requestLink}`);
   }
-};
+}

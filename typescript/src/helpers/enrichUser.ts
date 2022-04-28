@@ -3,7 +3,22 @@
  *
  * @returns User identifiers
  */
-module.exports = function enrichUser(/* userIdentifier */) {
+export function enrichUser(/* userIdentifier */): {
+  /** email */ email: [
+    {
+      /** Value of the email */ value: string;
+    },
+  ] /** */;
+  /** phone */
+  phone: [
+    {
+      /** country code of the phone */
+      countryCode: string;
+      /** value of the phone */
+      value: string;
+    },
+  ];
+}[] {
   return {
     email: [
       {
@@ -30,4 +45,4 @@ module.exports = function enrichUser(/* userIdentifier */) {
     //   },
     // ],
   };
-};
+}
