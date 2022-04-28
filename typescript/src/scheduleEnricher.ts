@@ -1,15 +1,12 @@
-const got = require('got');
+import got from 'got';
 
 // Constants
-const {
-  TRANSCEND_API_KEY,
-  SOMBRA_API_KEY,
-  SOMBRA_URL,
-} = require('./constants');
-const { logger } = require('./logger');
+import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } from './constants';
+
+import { logger } from './logger';
 
 // Helpers
-const { enrichUser } = require('./helpers');
+import { enrichUser } from './helpers';
 
 /**
  * Process an enrichment request - turn one identifier into many
@@ -18,11 +15,11 @@ const { enrichUser } = require('./helpers');
  * @param nonce - Nonce to respond with
  * @param requestLink - Link to request
  */
-module.exports = async function scheduleEnricher(
+export async function scheduleEnricher(
   userIdentifier: string,
   nonce: string,
   requestLink: string,
-) {
+): Promise<void> {
   logger.info(`Enriching identity - ${requestLink}`);
 
   // Find user data
@@ -49,4 +46,4 @@ module.exports = async function scheduleEnricher(
   } catch (error) {
     logger.error(`Failed to enriched user -${requestLink}`);
   }
-};
+}

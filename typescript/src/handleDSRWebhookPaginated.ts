@@ -16,7 +16,7 @@ import {
 
 import { logger } from './logger';
 
-const asyncHandler = require('express-async-handler');
+import asyncHandler from 'express-async-handler';
 
 // User data
 const FRIENDS = JSON.parse(

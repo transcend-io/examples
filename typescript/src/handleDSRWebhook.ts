@@ -6,7 +6,7 @@ import { logger } from './logger';
 
 import scheduleAccessRequest from './scheduleAccessRequest';
 
-const asyncHandler = require('express-async-handler');
+import asyncHandler from 'express-async-handler';
 
 /**
  * DSR webhook handler

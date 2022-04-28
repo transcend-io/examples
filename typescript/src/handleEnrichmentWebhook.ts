@@ -7,7 +7,7 @@ import { logger } from './logger';
 
 import scheduleEnricher from './scheduleEnricher';
 
-const asyncHandler = require('express-async-handler');
+import asyncHandler from 'express-async-handler';
 
 /**
  * Enrichment webhook handler.

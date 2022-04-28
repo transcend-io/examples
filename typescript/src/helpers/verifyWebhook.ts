@@ -1,14 +1,12 @@
 // Libraries
-const got = require('got');
-const jwt = require('jsonwebtoken');
+import got from 'got';
+
+import jwt from 'jsonwebtoken';
 
 // Constants
-const {
-  TRANSCEND_API_KEY,
-  SOMBRA_API_KEY,
-  SOMBRA_URL,
-} = require('../constants');
-const { logger } = require('../logger');
+import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } from '../constants';
+
+import { logger } from '../logger';
 
 // Global to cache the webhook signing public key
 let cachedPublicKey: string | undefined;
@@ -22,7 +20,7 @@ let cachedPublicKey: string | undefined;
  * @param signedToken - the JSON Web Token asymmetrically signed with ES384.
  * @returns - the signed body
  */
-module.exports = async function verifyWebhook(signedToken: string) {
+export async function verifyWebhook(signedToken: string): Promise<void> {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
@@ -47,4 +45,4 @@ module.exports = async function verifyWebhook(signedToken: string) {
   return jwt.verify(signedToken, cachedPublicKey, {
     algorithms: ['ES384'],
   });
-};
+}

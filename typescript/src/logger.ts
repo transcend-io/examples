@@ -1,1 +1,1 @@
-module.exports.logger = console;
+export const logger = console;
