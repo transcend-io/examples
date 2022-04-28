@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Example of an application integrated with Transcend.",
   "main": "src/app.ts",
+  "files": [
+    "src/**/*",
+    "package.json"
+  ],
   "scripts": {
-    "build": "tsc src/app.ts",
+    "build": "tsc --build",
     "start": "node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
