@@ -20,6 +20,12 @@ Internal system integrations in JavaScript. Check out the parent [README](../REA
 yarn
 ```
 
+## Build
+
+```sh
+yarn build
+```
+
 ## Start
 
 ```sh

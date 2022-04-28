@@ -11,13 +11,15 @@
   "author": "Transcend Inc.",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^17.0.29",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "got": "^11.6.2",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

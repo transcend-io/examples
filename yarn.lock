@@ -396,6 +396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^17.0.29":
+  version: 17.0.29
+  resolution: "@types/node@npm:17.0.29"
+  checksum: bb9d7bce9d6d3882efd9d63b773b548dce98df4bd57eff8ceaa316aa2f3346e36d3618764cc93da84bbff92005174a35eec3465cde91ee973ef1c351ffa40074
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
@@ -5049,6 +5056,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "typescript-eshopit@workspace:typescript"
   dependencies:
+    "@types/node": ^17.0.29
     body-parser: ^1.19.0
     dotenv: ^8.2.0
     express: ^4.17.1
@@ -5057,6 +5065,7 @@ __metadata:
     jsonwebtoken: ^8.5.1
     morgan: ^1.10.0
     nodemon: ^2.0.4
+    typescript: ^4.6.3
   languageName: unknown
   linkType: soft
 
