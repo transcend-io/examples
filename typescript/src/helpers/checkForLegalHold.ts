@@ -7,7 +7,7 @@
  * @param email - Email to check
  * @returns True if on legal hold
  */
-module.exports = function checkForLegalHold(email) {
+module.exports = function checkForLegalHold(email: string) {
   const flag = email.split('@')[0].split('+')[1];
   return ['legalhold'].includes(flag);
 };

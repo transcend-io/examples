@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Example of an application integrated with Transcend.",
   "main": "src/app.ts",
+  "type": "module",
   "files": [
     "src/**/*",
     "package.json"

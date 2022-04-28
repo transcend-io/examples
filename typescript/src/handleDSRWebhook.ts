@@ -1,5 +1,6 @@
-const asyncHandler = require('express-async-handler');
+import { Request, Response } from 'express';
 
+const asyncHandler = require('express-async-handler');
 // Helpers
 const { verifyWebhook } = require('./helpers');
 const { logger } = require('./logger');
@@ -10,9 +11,11 @@ const scheduleAccessRequest = require('./scheduleAccessRequest');
  * DSR webhook handler
  * Receives the DSR notification and schedules an async job.
  *
+ * @param req - request object
+ * @param res - response object
  * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-module.exports = asyncHandler(async (req, res) => {
+export async function asyncHandler(req: Request, res: Response): Promise<any> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
@@ -63,4 +66,4 @@ module.exports = asyncHandler(async (req, res) => {
   );
 
   return null;
-});
+}
