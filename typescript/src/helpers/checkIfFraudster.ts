@@ -7,7 +7,7 @@
  * @param email - Email to look up
  * @returns True if fraudster
  */
-module.exports = function checkIfFraudster(email) {
+module.exports = function checkIfFraudster(email: string) {
   const flag = email.split('@')[0].split('+')[1];
   return ['thefraudster', 'fraud', 'fraudster', 'activeuser'].includes(flag);
 };

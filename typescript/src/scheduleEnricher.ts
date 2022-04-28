@@ -19,9 +19,9 @@ const { enrichUser } = require('./helpers');
  * @param requestLink - Link to request
  */
 module.exports = async function scheduleEnricher(
-  userIdentifier,
-  nonce,
-  requestLink,
+  userIdentifier: string,
+  nonce: string,
+  requestLink: string,
 ) {
   logger.info(`Enriching identity - ${requestLink}`);
 

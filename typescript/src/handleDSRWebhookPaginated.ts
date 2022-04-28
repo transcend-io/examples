@@ -34,9 +34,9 @@ const MockDatabaseModel = {
  * @param requestLink - Link to request
  */
 async function scheduleAccessChunkedRequest(
-  userIdentifier,
-  nonce,
-  requestLink,
+  userIdentifier: string,
+  nonce: string,
+  requestLink: string,
 ): any {
   logger.info(`Uploading data - ${requestLink}`);
   try {

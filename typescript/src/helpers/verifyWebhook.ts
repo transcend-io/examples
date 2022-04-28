@@ -11,7 +11,7 @@ const {
 const { logger } = require('../logger');
 
 // Global to cache the webhook signing public key
-let cachedPublicKey;
+let cachedPublicKey: string | undefined;
 
 /**
  * Helper to verify incoming webhook requests
@@ -22,7 +22,7 @@ let cachedPublicKey;
  * @param signedToken - the JSON Web Token asymmetrically signed with ES384.
  * @returns - the signed body
  */
-module.exports = async function verifyWebhook(signedToken) {
+module.exports = async function verifyWebhook(signedToken: string) {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {

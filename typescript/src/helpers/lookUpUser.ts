@@ -4,7 +4,7 @@
  * @param userIdentifier - User identifier to lookup
  * @returns User data
  */
-module.exports = function lookUpUser(userIdentifier) {
+module.exports = function lookUpUser(userIdentifier: string) {
   return [
     {
       profileId: userIdentifier,
