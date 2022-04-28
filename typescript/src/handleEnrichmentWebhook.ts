@@ -1,19 +1,22 @@
-const asyncHandler = require('express-async-handler');
+import { Request, Response } from 'express';
 
 // Helpers
-const {
-  checkIfFraudster,
-  checkForLegalHold,
-  verifyWebhook,
-} = require('./helpers');
-const { logger } = require('./logger');
-const scheduleEnricher = require('./scheduleEnricher');
+import { checkIfFraudster, checkForLegalHold, verifyWebhook } from './helpers';
+
+import { logger } from './logger';
+
+import scheduleEnricher from './scheduleEnricher';
+
+const asyncHandler = require('express-async-handler');
 
 /**
  * Enrichment webhook handler.
  * Checks for fraud/legal holds and returns extra identifiers.
+ *
+ * @param req - Express request object
+ * @param res - Express response object
  */
-module.exports = asyncHandler(async (req, res) => {
+export async function asyncHandler(req: Request, res: Response): Promise<void> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
@@ -66,4 +69,4 @@ module.exports = asyncHandler(async (req, res) => {
   );
 
   return null;
-});
+}

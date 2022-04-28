@@ -1,19 +1,22 @@
-const got = require('got');
-const fs = require('fs');
-const path = require('path');
-const asyncHandler = require('express-async-handler');
+import got from 'got';
+import { Request, Response } from 'express';
+import fs from 'fs';
+import path from 'path';
 
 // Helpers
-const { verifyWebhook } = require('./helpers');
+import { verifyWebhook } from './helpers';
 
 // Constants
-const {
+import {
   TRANSCEND_API_KEY,
   SOMBRA_API_KEY,
   SOMBRA_URL,
   MEDIA_FOLDER,
-} = require('./constants');
-const { logger } = require('./logger');
+} from './constants';
+
+import { logger } from './logger';
+
+const asyncHandler = require('express-async-handler');
 
 // User data
 const FRIENDS = JSON.parse(
@@ -83,10 +86,12 @@ async function scheduleAccessChunkedRequest(
 /**
  * DSR webhook handler for large amounts of data that need to be paginated.
  *
+ * @param req - Express request object
+ * @param res - Express response object
  * @see https://docs.transcend.io/docs/api-reference/POST/v1/datapoint-chunked
  * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-module.exports = asyncHandler(async (req, res) => {
+export async function asyncHandler(req: Request, res: Response): Promise<void> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
@@ -131,4 +136,4 @@ module.exports = asyncHandler(async (req, res) => {
   );
 
   return null;
-});
+}

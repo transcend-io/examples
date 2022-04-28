@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+// Helpers
+import { verifyWebhook } from './helpers';
+
+import { logger } from './logger';
+
+import scheduleAccessRequest from './scheduleAccessRequest';
 
 const asyncHandler = require('express-async-handler');
-// Helpers
-const { verifyWebhook } = require('./helpers');
-const { logger } = require('./logger');
-
-const scheduleAccessRequest = require('./scheduleAccessRequest');
 
 /**
  * DSR webhook handler
