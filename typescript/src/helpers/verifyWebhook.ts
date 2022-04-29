@@ -21,7 +21,7 @@ let cachedPublicKey: string | undefined;
  * @returns - the signed body
  */
 export async function verifyWebhook(
-  signedToken: string | undefined,
+  signedToken: string | string[] | undefined,
 ): Promise<void> {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
@@ -42,9 +42,12 @@ export async function verifyWebhook(
       logger.error('Failed to get public key:', err);
     }
   }
-
   // Verify webhook signature with the public key (ensures that Transcend sent the request)
-  return jwt.verify(signedToken, cachedPublicKey, {
-    algorithms: ['ES384'],
-  });
+  return jwt.verify(
+    Array.isArray(signedToken) ? signedToken.join() : signedToken || '',
+    cachedPublicKey,
+    {
+      algorithms: ['ES384'],
+    },
+  );
 }
