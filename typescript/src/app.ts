@@ -8,8 +8,6 @@
 // Libraries
 import express, { Request, Response } from 'express';
 
-import bodyParser from 'body-parser';
-
 import morgan from 'morgan';
 
 // Load webhook handling middlewares
@@ -35,12 +33,12 @@ app.all('/health', (req: Request, res: Response) => res.sendStatus(200));
 app.use(morgan('tiny'));
 
 app.use(
-  bodyParser.urlencoded({
+  express.urlencoded({
     extended: false,
   }),
 );
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 /**
  * Receive webhook for identity enrichment (optional)
