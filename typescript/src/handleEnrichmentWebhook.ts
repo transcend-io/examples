@@ -59,7 +59,8 @@ export default async function handleEnrichmentWebhook(
   }
 
   // Schedule the enrichment job
-  const nonce = req.headers['x-transcend-nonce'];
+  let nonce: string | string[] | undefined = req.headers['x-transcend-nonce'];
+  nonce = Array.isArray(nonce) ? nonce.join() : nonce || '';
   scheduleEnricher(requestIdentifier, nonce, req.body.extras.request.link);
 
   // Indicate we got the webhook

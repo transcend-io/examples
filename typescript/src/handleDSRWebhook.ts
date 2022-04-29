@@ -32,7 +32,8 @@ export default async function handleDSRWebhook(
   // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
   const userIdentifier = req.body.extras.profile.identifier;
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
-  const nonce = req.headers['x-transcend-nonce'];
+  let nonce: string | string[] | undefined = req.headers['x-transcend-nonce'];
+  nonce = Array.isArray(nonce) ? nonce.join() : nonce || '';
 
   // Depending on the type of webhook, respond accordingly.
   switch (webhookType) {

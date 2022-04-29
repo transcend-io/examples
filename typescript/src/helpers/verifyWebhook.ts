@@ -1,6 +1,5 @@
 // Libraries
 import got from 'got';
-
 import jwt from 'jsonwebtoken';
 
 // Constants
@@ -9,7 +8,7 @@ import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } from '../constants';
 import { logger } from '../logger';
 
 // Global to cache the webhook signing public key
-let cachedPublicKey: string | undefined;
+let cachedPublicKey: jwt.Secret | jwt.GetPublicKeyOrSecret;
 
 /**
  * Helper to verify incoming webhook requests
