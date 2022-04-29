@@ -85,7 +85,10 @@ async function scheduleAccessChunkedRequest(
     }
     logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
-    logger.error(`Failed to upload data - ${requestLink} - ${error.message}`);
+    const typedError = error as Error;
+    logger.error(
+      `Failed to upload data - ${requestLink} - ${typedError.message}`,
+    );
   }
 }
 
