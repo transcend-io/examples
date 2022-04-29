@@ -29,7 +29,7 @@ const pipeline = promisify(stream.pipeline);
  * @param nonce - Nonce to respond with
  * @param requestLink - Link to request
  */
-export async function scheduleAccessRequest(
+export default async function scheduleAccessRequest(
   userIdentifier: string,
   nonce: string,
   requestLink: string,

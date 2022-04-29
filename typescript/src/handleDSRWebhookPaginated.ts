@@ -16,8 +16,6 @@ import {
 
 import { logger } from './logger';
 
-import asyncHandler from 'express-async-handler';
-
 // User data
 const FRIENDS = JSON.parse(
   fs.readFileSync(path.join(MEDIA_FOLDER, 'friends.json'), 'utf8'),
@@ -91,7 +89,7 @@ async function scheduleAccessChunkedRequest(
  * @see https://docs.transcend.io/docs/api-reference/POST/v1/datapoint-chunked
  * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-export default async function asyncHandler(
+export default async function handleDSRWebhookPaginated(
   req: Request,
   res: Response,
 ): Promise<void> {

@@ -6,8 +6,6 @@ import { logger } from './logger';
 
 import scheduleAccessRequest from './scheduleAccessRequest';
 
-import asyncHandler from 'express-async-handler';
-
 /**
  * DSR webhook handler
  * Receives the DSR notification and schedules an async job.
@@ -16,7 +14,7 @@ import asyncHandler from 'express-async-handler';
  * @param res - response object
  * @see https://docs.transcend.io/docs/api-reference/webhook/new-privacy-request-job
  */
-export default async function asyncHandler(
+export default async function handleDSRWebhook(
   req: Request,
   res: Response,
 ): Promise<void> {

@@ -7,8 +7,6 @@ import { logger } from './logger';
 
 import scheduleEnricher from './scheduleEnricher';
 
-import asyncHandler from 'express-async-handler';
-
 /**
  * Enrichment webhook handler.
  * Checks for fraud/legal holds and returns extra identifiers.
@@ -16,10 +14,10 @@ import asyncHandler from 'express-async-handler';
  * @param req - Express request object
  * @param res - Express response object
  */
-export default async function asyncHandler(
+export default async function handleEnrichmentWebhook(
   req: Request,
   res: Response,
-): Promise<Response<any, Record<string, any>>> {
+): Promise<void> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);

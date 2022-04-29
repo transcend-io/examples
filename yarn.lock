@@ -440,6 +440,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/morgan@npm:^1.9.3":
+  version: 1.9.3
+  resolution: "@types/morgan@npm:1.9.3"
+  dependencies:
+    "@types/node": "*"
+  checksum: 0b9bc8641ce03f7176f617523b8da300e5d47225b1667396749950ac7fdfa1f990447d490648fbaff050c2b0ef5fa60c3f2f00c6b76efec06fe5148de5020813
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 17.0.26
   resolution: "@types/node@npm:17.0.26"
@@ -5140,6 +5149,7 @@ __metadata:
   dependencies:
     "@types/express": ^4.17.13
     "@types/jsonwebtoken": ^8.5.8
+    "@types/morgan": ^1.9.3
     "@types/node": ^17.0.29
     body-parser: ^1.19.0
     dotenv: ^8.2.0

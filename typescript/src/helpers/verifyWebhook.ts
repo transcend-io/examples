@@ -20,7 +20,9 @@ let cachedPublicKey: string | undefined;
  * @param signedToken - the JSON Web Token asymmetrically signed with ES384.
  * @returns - the signed body
  */
-export async function verifyWebhook(signedToken: string): Promise<void> {
+export async function verifyWebhook(
+  signedToken: string | undefined,
+): Promise<void> {
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
