@@ -1,10 +1,6 @@
 import got from 'got';
 
-import fs from 'fs';
-
 import path from 'path';
-
-import stream from 'stream';
 
 import { promisify } from 'util';
 
@@ -19,6 +15,10 @@ import {
 import { logger } from './logger';
 // Helpers
 import { lookUpUser } from './helpers';
+
+const fs = require('fs');
+
+const stream = require('stream');
 
 const pipeline = promisify(stream.pipeline);
 

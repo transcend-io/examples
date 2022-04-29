@@ -1,7 +1,5 @@
 import got from 'got';
 import { Request, Response } from 'express';
-import fs from 'fs';
-import path from 'path';
 
 // Helpers
 import { verifyWebhook } from './helpers';
@@ -15,6 +13,10 @@ import {
 } from './constants';
 
 import { logger } from './logger';
+
+const path = require('path');
+
+const fs = require('fs');
 
 // User data
 const FRIENDS = JSON.parse(
