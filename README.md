@@ -21,7 +21,7 @@ Some examples of how to integrate with Transcend in various languages. See [our 
 - Python
 - Ruby
 - [Coming soon] Go
-- [Coming soon] Typescript
+- Typescript
 
 ## What are these examples
 
