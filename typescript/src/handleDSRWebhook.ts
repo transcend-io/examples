@@ -17,7 +17,7 @@ import scheduleAccessRequest from './scheduleAccessRequest';
 export default async function handleDSRWebhook(
   req: Request,
   res: Response,
-): Promise<void> {
+): Promise<Response<number, Record<string, number>> | null> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
