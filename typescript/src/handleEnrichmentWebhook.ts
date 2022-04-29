@@ -19,7 +19,7 @@ import asyncHandler from 'express-async-handler';
 export default async function asyncHandler(
   req: Request,
   res: Response,
-): Promise<void> {
+): Promise<Response<any, Record<string, any>>> {
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);

@@ -4,21 +4,18 @@
  * @returns User identifiers
  */
 export function enrichUser(/* userIdentifier */): {
-  /** email */ email: [
-    {
-      /** Value of the email */ value: string;
-    },
-  ] /** */;
+  /** email */ email: {
+    /** Value of the email */
+    value: string;
+  }[];
   /** phone */
-  phone: [
-    {
-      /** country code of the phone */
-      countryCode: string;
-      /** value of the phone */
-      value: string;
-    },
-  ];
-}[] {
+  phone: {
+    /** country code of the phone */
+    countryCode: string;
+    /** value of the phone */
+    value: string;
+  }[];
+} {
   return {
     email: [
       {

@@ -15,7 +15,7 @@ import { enrichUser } from './helpers';
  * @param nonce - Nonce to respond with
  * @param requestLink - Link to request
  */
-export async function scheduleEnricher(
+export default async function scheduleEnricher(
   userIdentifier: string,
   nonce: string,
   requestLink: string,
@@ -23,7 +23,9 @@ export async function scheduleEnricher(
   logger.info(`Enriching identity - ${requestLink}`);
 
   // Find user data
-  const identifiers = await enrichUser(userIdentifier);
+  // const identifiers = await enrichUser(userIdentifier);
+  // TODO: Figure out why this is not passing a user identifier
+  const identifiers = await enrichUser();
 
   try {
     // Upload enriched values to Transcend
