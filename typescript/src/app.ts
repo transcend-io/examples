@@ -6,9 +6,7 @@
 
 // Load environment variables
 // Libraries
-import express, { Request, Response } from 'express';
-
-import morgan from 'morgan';
+import { Request, Response } from 'express';
 
 // Load webhook handling middlewares
 import handleEnrichmentWebhook from './handleEnrichmentWebhook';
@@ -21,6 +19,9 @@ import handleDSRWebhookPaginated from './handleDSRWebhookPaginated';
 import { PORT } from './constants';
 
 import { logger } from './logger';
+
+const morgan = require('morgan');
+const express = require('express');
 
 require('dotenv').config();
 
