@@ -24,7 +24,15 @@ const FRIENDS = JSON.parse(
 // Mock database
 // this is used for the purposes of demoing
 const MockDatabaseModel = {
-  findAll: ({ limit, offset }) => FRIENDS.slice(offset, offset + limit),
+  findAll: ({
+    limit,
+    offset,
+  }: {
+    /** Limit per request */
+    limit: number;
+    /** Offset of the request */
+    offset: number;
+  }) => FRIENDS.slice(offset, offset + limit),
 };
 
 /**
@@ -48,8 +56,8 @@ async function scheduleAccessChunkedRequest(
     let i = 0;
     while (hasMore) {
       const data = await MockDatabaseModel.findAll({
-        where: { userId: userIdentifier },
-        order: [['createdAt', 'DESC']],
+        // where: { userId: userIdentifier },
+        // order: [['createdAt', 'DESC']],
         limit: PAGE_SIZE,
         offset,
       });
@@ -107,7 +115,8 @@ export default async function handleDSRWebhookPaginated(
   // req.body.extras.profile.type will tell you if this is an email vs username, vs other identifier
   const userIdentifier = req.body.extras.profile.identifier;
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
-  const nonce = req.headers['x-transcend-nonce'];
+  let nonce: string | string[] | undefined = req.headers['x-transcend-nonce'];
+  nonce = Array.isArray(nonce) ? nonce.join() : nonce || '';
 
   // Depending on the type of webhook, respond accordingly.
   switch (webhookType) {
