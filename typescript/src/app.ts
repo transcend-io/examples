@@ -6,7 +6,7 @@
 
 // Load environment variables
 // Libraries
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 import bodyParser from 'body-parser';
 
@@ -22,14 +22,14 @@ import handleDSRWebhookPaginated from './handleDSRWebhookPaginated';
 // Constants
 import { PORT } from './constants';
 
-import logger from './logger';
+import { logger } from './logger';
 
 require('dotenv').config();
 
 // Set up the server
 const app = express();
 const port = PORT;
-app.all('/health', (_, res) => res.sendStatus(200));
+app.all('/health', (req: Request, res: Response) => res.sendStatus(200));
 
 // Middlewares
 app.use(morgan('tiny'));
