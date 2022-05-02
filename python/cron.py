@@ -21,7 +21,7 @@ Headers used to authenticate to sombra and transcend
 headers = {
     "Authorization": "Bearer " + TRANSCEND_API_KEY,
 }
-SOMBRA_URL = "https://sombra.transcend.io"
+SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
 
 """
   List out requests that need to be processed for a particular data silos/action combination
@@ -78,7 +78,7 @@ def main():
         for result in results:
             run_job(result['identifier'], ACTION_TYPE)
             notify_compelted(result['identifier'], result['nonce'])
-        
+
         if len(results) == 0:
             break
 if __name__ == '__main__':
