@@ -10,7 +10,7 @@
     - [SOMBRA_API_KEY](#sombra_api_key)
     - [SOMBRA_URL](#sombra_url)
   - [Languages](#languages)
-  - [Try it on Replit](#replit)
+  - [Try it on Replit](#try-it-on-replit)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
