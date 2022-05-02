@@ -10,6 +10,7 @@
     - [SOMBRA_API_KEY](#sombra_api_key)
     - [SOMBRA_URL](#sombra_url)
   - [Languages](#languages)
+  - [Try it on Replit](#try-it-on-replit)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -20,8 +21,8 @@ Some examples of how to integrate with Transcend in various languages. See [our 
 - Javascript
 - Python
 - Ruby
-- [Coming soon] Go
 - Typescript
+- [Coming soon] Go
 
 ## What are these examples
 
@@ -74,5 +75,12 @@ This is the URL of your Sombra gateway.
 Check out your language of choice for further details
 
 - [JavaScript](./javascript)
+- [Typescript](./typescript)
 - [Python](./python)
 - [Ruby](./ruby)
+
+## Try it on Replit
+
+If you want to try out an example that is ready to run, you can head to Replit and fork the example.
+
+The example is located [here](https://replit.com/@giacaglia/Webhook-Transcend?v=1). You will need to first fork the replit and then you can start running the code. The webhook url will be located in the url generated at the top right. You will need to update some of the secrets, including  `TRANSCEND_API_KEY`.
