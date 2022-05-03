@@ -1,7 +1,7 @@
 {
-  "name": "typescript-eshopit",
+  "name": "typescript-webhook-example",
   "version": "1.0.0",
-  "description": "Example of an application integrated with Transcend.",
+  "description": "Example of a webhook that can be integrated with Transcend.",
   "main": "src/app.ts",
   "files": [
     "src/**/*",
