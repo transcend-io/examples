@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Example of a webhook that can be integrated with Transcend.",
   "main": "src/app.ts",
+  "type": "module",
   "files": [
     "src/**/*",
     "package.json"
