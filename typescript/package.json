@@ -31,5 +31,20 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/transcend-io/examples.git"
+  },
+  "keywords": [
+    "transcend",
+    "webhook",
+    "example",
+    "access",
+    "erasure"
+  ],
+  "bugs": {
+    "url": "https://github.com/transcend-io/examples/issues"
+  },
+  "homepage": "https://github.com/transcend-io/examples#readme"
 }
