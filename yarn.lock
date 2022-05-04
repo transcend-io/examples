@@ -5262,9 +5262,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eshopit@workspace:typescript":
+"typescript-webhook-example@workspace:typescript":
   version: 0.0.0-use.local
-  resolution: "typescript-eshopit@workspace:typescript"
+  resolution: "typescript-webhook-example@workspace:typescript"
   dependencies:
     "@types/express": ^4.17.13
     "@types/jsonwebtoken": ^8.5.8

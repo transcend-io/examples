@@ -84,3 +84,8 @@ Check out your language of choice for further details
 If you want to try out an example that is ready to run, you can head to Replit and fork the example.
 
 The example is located [here](https://replit.com/@giacaglia/Webhook-Transcend?v=1). You will need to first fork the replit and then you can start running the code. The webhook url will be located in the url generated at the top right. You will need to update some of the secrets, including  `TRANSCEND_API_KEY`.
+
+Here are two videos of how to set it up on Replit: 
+
+- [First part](https://www.loom.com/share/558f95537e27471b8bc8943cbf5c29d2)
+- [Second part](https://www.loom.com/share/2a6582166d284171893fe00f93629fd4)
