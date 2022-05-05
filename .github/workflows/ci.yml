@@ -73,8 +73,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-          registry-url: https://npm.pkg.github.com/
-          scope: '@transcend-io'
       - name: Configure Github Packages authentication
         run: |
           yarn config set npmAlwaysAuth true
@@ -82,4 +80,4 @@ jobs:
           yarn config set npmPublishRegistry https://npm.pkg.github.com
           yarn config set npmAuthToken ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Github packages
-        run: echo 'Before yarn' && yarn && echo 'After yarn' && cd typescript && echo 'before publish' && yarn npm publish
+        run: cd typescript && yarn npm publish
