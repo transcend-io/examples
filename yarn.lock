@@ -335,6 +335,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@transcend-io/typescript-webhook-example@workspace:typescript":
+  version: 0.0.0-use.local
+  resolution: "@transcend-io/typescript-webhook-example@workspace:typescript"
+  dependencies:
+    "@types/express": ^4.17.13
+    "@types/jsonwebtoken": ^8.5.8
+    "@types/morgan": ^1.9.3
+    "@types/node": ^17.0.29
+    dotenv: ^8.2.0
+    express: ^4.17.1
+    express-async-handler: ^1.1.4
+    got: ^11.6.2
+    jsonwebtoken: ^8.5.1
+    morgan: ^1.10.0
+    nodemon: ^2.0.4
+    ts-node: ^10.7.0
+    typescript: ^4.6.3
+  languageName: unknown
+  linkType: soft
+
 "@tsconfig/node10@npm:^1.0.7":
   version: 1.0.8
   resolution: "@tsconfig/node10@npm:1.0.8"
@@ -5261,26 +5281,6 @@ __metadata:
   checksum: 99c11aaa8f45189fcfba6b8a4825fd684a321caa9bd7a76a27cf0c7732c174d198b99f449c52c3818107430b5f41c0ccbbfb75cb2ee3ca4a9451710986d61a60
   languageName: node
   linkType: hard
-
-"typescript-webhook-example@workspace:typescript":
-  version: 0.0.0-use.local
-  resolution: "typescript-webhook-example@workspace:typescript"
-  dependencies:
-    "@types/express": ^4.17.13
-    "@types/jsonwebtoken": ^8.5.8
-    "@types/morgan": ^1.9.3
-    "@types/node": ^17.0.29
-    dotenv: ^8.2.0
-    express: ^4.17.1
-    express-async-handler: ^1.1.4
-    got: ^11.6.2
-    jsonwebtoken: ^8.5.1
-    morgan: ^1.10.0
-    nodemon: ^2.0.4
-    ts-node: ^10.7.0
-    typescript: ^4.6.3
-  languageName: unknown
-  linkType: soft
 
 "typescript@npm:^4.6.3":
   version: 4.6.3

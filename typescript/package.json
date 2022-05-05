@@ -2,13 +2,14 @@
   "name": "@transcend-io/typescript-webhook-example",
   "version": "1.0.1",
   "description": "Example of a webhook that can be integrated with Transcend.",
-  "main": "src/app.ts",
+  "main": "build/app.js",
   "type": "module",
   "files": [
-    "src/**/*",
+    "build/**/*",
     "package.json"
   ],
   "scripts": {
+    "prepublish": "yarn build",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "start": "ts-node ./src/app.ts",
