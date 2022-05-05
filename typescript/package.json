@@ -1,14 +1,16 @@
 {
-  "name": "typescript-webhook-example",
-  "version": "1.0.0",
+  "name": "@transcend-io/typescript-webhook-example",
+  "version": "1.0.1",
   "description": "Example of a webhook that can be integrated with Transcend.",
-  "main": "src/app.ts",
+  "main": "build/app.js",
+  "type": "module",
   "files": [
-    "src/**/*",
+    "build/**/*",
     "package.json"
   ],
   "scripts": {
-    "build": "tsc --build",
+    "prepublish": "yarn build",
+    "build": "BUILD_PATH='./build' tsc --build",
     "clean": "tsc --build --clean",
     "start": "ts-node ./src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

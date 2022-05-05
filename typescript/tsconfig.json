@@ -3,7 +3,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "target": "esnext",
-    "outDir": "./out/" /* Redirect output structure to the directory. */,
+    "outDir": "./build/" /* Redirect output structure to the directory. */,
     "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
     "strict": true /* Enable all strict type-checking options. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
