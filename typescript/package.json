@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "prepublish": "yarn build",
-    "build": "tsc --build",
+    "build": "BUILD_PATH='./build' tsc --build",
     "clean": "tsc --build --clean",
     "start": "ts-node ./src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
