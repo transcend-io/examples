@@ -82,4 +82,4 @@ jobs:
           yarn config set npmPublishRegistry https://npm.pkg.github.com
           yarn config set npmAuthToken ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Github packages
-        run: yarn && cd typescript && yarn npm publish
+        run: echo 'Before yarn' && yarn && echo 'After yarn' && cd typescript && echo 'before publish' && yarn npm publish
