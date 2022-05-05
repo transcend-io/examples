@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the typescript code
-        run: cd typescript && yarn build
+        run: cd typescript && yarn && yarn build
       - uses: actions/upload-artifact@main
         with:
           name: build artifacts
