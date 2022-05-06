@@ -7,4 +7,4 @@ export const SOMBRA_URL =
 
 export const PORT = process.env.PORT || 8081;
 
-export const MEDIA_FOLDER = path.join(__dirname, '..', 'media');
+export const MEDIA_FOLDER = path.join(__dirname, 'media');

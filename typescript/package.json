@@ -5,6 +5,7 @@
   "main": "build/app.js",
   "type": "module",
   "files": [
+    "media/*",
     "build/**/*",
     "package.json"
   ],
