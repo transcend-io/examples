@@ -25,17 +25,3 @@ services:
     buildCommand: cd javascript && yarn
     startCommand: cd javascript && yarn && yarn start
     healthCheckPath: /health
-
-envVarGroups:
-  - name: conc-settings
-    envVars:
-      - key: CONCURRENCY
-        value: 2
-      - key: SECRET
-        generateValue: true
-      - key: USER_PROVIDED_SECRET
-        sync: false
-  - name: stripe
-    envVars:
-      - key: STRIPE_API_URL
-        value: https://api.stripe.com/v2
