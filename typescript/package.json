@@ -1,6 +1,6 @@
 {
   "name": "@transcend-io/typescript-webhook-example",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Example of a webhook that can be integrated with Transcend.",
   "main": "build/app.js",
   "type": "module",
