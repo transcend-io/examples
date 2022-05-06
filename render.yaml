@@ -1,0 +1,41 @@
+services:
+  # A webhook service for staging
+  - type: web
+    name: typescript-webhook-staging
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
+
+  # A webhook service for dev
+  - type: web
+    name: typescript-webhook-dev
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
+
+  # A webhook service for production
+  - type: web
+    name: typescript-webhook-prod
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
+
+envVarGroups:
+  - name: conc-settings
+    envVars:
+      - key: CONCURRENCY
+        value: 2
+      - key: SECRET
+        generateValue: true
+      - key: USER_PROVIDED_SECRET
+        sync: false
+  - name: stripe
+    envVars:
+      - key: STRIPE_API_URL
+        value: https://api.stripe.com/v2
