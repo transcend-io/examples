@@ -1,5 +1,5 @@
 {
-  "name": "eshopit",
+  "name": "@transcend-io/examples-javascript",
   "version": "1.0.0",
   "description": "Example of an application integrated with Transcend.",
   "main": "src/app.js",
