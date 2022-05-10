@@ -1,0 +1,27 @@
+services:
+  # A webhook service for staging
+  - type: web
+    name: typescript-webhook-staging
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
+
+  # A webhook service for dev
+  - type: web
+    name: typescript-webhook-dev
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
+
+  # A webhook service for production
+  - type: web
+    name: typescript-webhook-prod
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health

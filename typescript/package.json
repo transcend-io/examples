@@ -1,14 +1,17 @@
 {
-  "name": "typescript-eshopit",
-  "version": "1.0.0",
-  "description": "Example of an application integrated with Transcend.",
-  "main": "src/app.ts",
+  "name": "@transcend-io/typescript-webhook-example",
+  "version": "1.0.4",
+  "description": "Example of a webhook that can be integrated with Transcend.",
+  "main": "build/app.js",
+  "type": "module",
   "files": [
-    "src/**/*",
+    "media/*",
+    "build/**/*",
     "package.json"
   ],
   "scripts": {
-    "build": "tsc --build",
+    "prepublish": "yarn build",
+    "build": "BUILD_PATH='./build' tsc --build",
     "clean": "tsc --build --clean",
     "start": "ts-node ./src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,5 +34,20 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/transcend-io/examples.git"
+  },
+  "keywords": [
+    "transcend",
+    "webhook",
+    "example",
+    "access",
+    "erasure"
+  ],
+  "bugs": {
+    "url": "https://github.com/transcend-io/examples/issues"
+  },
+  "homepage": "https://github.com/transcend-io/examples#readme"
 }
