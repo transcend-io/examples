@@ -1,7 +1,7 @@
 services:
   # A webhook service for staging
   - type: web
-    name: typescript-webhook-staging
+    name: javascript-webhook-staging
     env: node
     repo: https://github.com/transcend-io/examples
     buildCommand: cd javascript && yarn
@@ -19,7 +19,7 @@ services:
 
   # A webhook service for dev
   - type: web
-    name: typescript-webhook-dev
+    name: javascript-webhook-dev
     env: node
     repo: https://github.com/transcend-io/examples
     buildCommand: cd javascript && yarn
@@ -37,7 +37,7 @@ services:
 
   # A webhook service for production
   - type: web
-    name: typescript-webhook-prod
+    name: javascript-webhook-prod
     env: node
     repo: https://github.com/transcend-io/examples
     buildCommand: cd javascript && yarn
