@@ -19,6 +19,7 @@
   },
   "workspaces": [
     "javascript",
+    "trackers-demo",
     "typescript"
   ],
   "devDependencies": {
