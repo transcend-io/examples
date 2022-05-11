@@ -43,3 +43,12 @@ services:
     buildCommand: cd javascript && yarn
     startCommand: cd javascript && yarn && yarn start
     healthCheckPath: /health
+
+  # A webhook service for production - Rideshare organization
+  - type: web
+    name: javascript-webhook-prod-rideshare
+    env: node
+    repo: https://github.com/transcend-io/examples
+    buildCommand: cd javascript && yarn
+    startCommand: cd javascript && yarn && yarn start
+    healthCheckPath: /health
