@@ -25,17 +25,16 @@ export async function verifyWebhook(
   // Get the public key and cache it for next time.
   if (!cachedPublicKey) {
     try {
-      const response = await got.get(
-        `${SOMBRA_URL}/public-keys/sombra-general-signing-key`,
-        {
-          headers: {
-            authorization: `Bearer ${TRANSCEND_API_KEY}`,
-            'x-sombra-authorization': SOMBRA_API_KEY
-              ? `Bearer ${SOMBRA_API_KEY}`
-              : undefined,
-          },
+      const publicKeyUrl = `${SOMBRA_URL}/public-keys/sombra-general-signing-key`;
+      logger.info(`Fetching transcend public key: ${publicKeyUrl}`);
+      const response = await got.get(publicKeyUrl, {
+        headers: {
+          authorization: `Bearer ${TRANSCEND_API_KEY}`,
+          'x-sombra-authorization': SOMBRA_API_KEY
+            ? `Bearer ${SOMBRA_API_KEY}`
+            : undefined,
         },
-      );
+      });
       cachedPublicKey = response.body;
     } catch (err) {
       logger.error('Failed to get public key:', err);
