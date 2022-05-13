@@ -2,6 +2,8 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "target": "esnext",
     "module": "commonjs",
     "outDir": "./build/" /* Redirect output structure to the directory. */,
