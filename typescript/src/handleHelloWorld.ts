@@ -7,10 +7,7 @@ import { Request, Response } from 'express';
  * @param res - response object
  * @returns null
  */
-export default  function handleDSRWebhook(
-  req: Request,
-  res: Response,
-): null {
+export default function handleDSRWebhook(req: Request, res: Response): null {
   res.send('hello!');
   return null;
 }

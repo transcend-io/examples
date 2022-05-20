@@ -3,7 +3,12 @@ import got from 'got';
 import jwt from 'jsonwebtoken';
 
 // Constants
-import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, AUDIENCE } from '../constants';
+import {
+  TRANSCEND_API_KEY,
+  SOMBRA_API_KEY,
+  SOMBRA_URL,
+  AUDIENCE,
+} from '../constants';
 
 import { logger } from '../logger';
 

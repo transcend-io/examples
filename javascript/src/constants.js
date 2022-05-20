@@ -1,6 +1,7 @@
 const path = require('path');
 
-const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, PORT, AUDIENCE } = process.env;
+const { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, PORT, AUDIENCE } =
+  process.env;
 
 module.exports = {
   TRANSCEND_API_KEY,
