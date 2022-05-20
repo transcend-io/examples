@@ -3,7 +3,7 @@ import got from 'got';
 import jwt from 'jsonwebtoken';
 
 // Constants
-import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL } from '../constants';
+import { TRANSCEND_API_KEY, SOMBRA_API_KEY, SOMBRA_URL, AUDIENCE } from '../constants';
 
 import { logger } from '../logger';
 
@@ -41,11 +41,16 @@ export async function verifyWebhook(
     }
   }
   // Verify webhook signature with the public key (ensures that Transcend sent the request)
-  return jwt.verify(
+  const signedBody = jwt.verify(
     Array.isArray(signedToken) ? signedToken.join() : signedToken || '',
     cachedPublicKey,
     {
       algorithms: ['ES384'],
+      audience: AUDIENCE,
     },
-  );
+  ) as unknown as jwt.JwtPayload;
+
+  if (signedBody.scope !== 'coreIdentifier') {
+    throw Error('Found JWT with incorrect scope for webhook requests');
+  }
 }
