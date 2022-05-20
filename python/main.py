@@ -69,7 +69,7 @@ Get the sombra public key, used to verify the request
 def get_transcend_public_key():
     res = requests.get(
         SOMBRA_URL + '/public-keys/sombra-general-signing-key',
-        # verify = not TRUST_SELF_SIGNED_CERT,
+        verify = not TRUST_SELF_SIGNED_CERT,
         headers = { "authorization": "Bearer {}".format(TRANSCEND_API_KEY) }
     )
     return res.content
