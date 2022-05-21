@@ -17,7 +17,7 @@ Internal system integrations in Ruby. Check out the parent [README](../README.md
 
 ## Installation
 
-Install Ruby via homebrew
+Install Ruby via homebrew (if not using Codespaces)
 
 ```sh
 brew install ruby

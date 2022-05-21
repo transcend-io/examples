@@ -7,6 +7,7 @@ const {
   TRANSCEND_API_KEY,
   SOMBRA_API_KEY,
   SOMBRA_URL,
+  AUDIENCE,
 } = require('../constants');
 const { logger } = require('../logger');
 
@@ -44,7 +45,14 @@ module.exports = async function verifyWebhook(signedToken) {
   }
 
   // Verify webhook signature with the public key (ensures that Transcend sent the request)
-  return jwt.verify(signedToken, cachedPublicKey, {
+  const signedBody = jwt.verify(signedToken, cachedPublicKey, {
     algorithms: ['ES384'],
+    audience: AUDIENCE,
   });
+
+  if (signedBody.scope !== 'coreIdentifier') {
+    throw Error('Found JWT with incorrect scope for webhook requests');
+  }
+
+  return signedBody;
 };
