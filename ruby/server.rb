@@ -19,6 +19,9 @@ $SOMBRA_API_KEY = ENV["SOMBRA_API_KEY"]
 # The url of the sombra instance
 $SOMBRA_URL = ENV["SOMBRA_URL"]
 
+# The audience on the JWT to verify. You can find your Organization URI at https://app.transcend.io/settings, which is the audience
+$AUDIENCE = ENV["AUDIENCE"]
+
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always -- in production you should always verify the JWT
 $VERIFY_JWT = true
 
@@ -40,7 +43,12 @@ $MOCK_DATA = {
        :gpa => 3.89,
        :name => 'Freddie Mercury',
        :id => '19530621'
-    }
+    },
+    'david+test@transcend.io' => {
+      :gpa => 1.3,
+      :name => 'Mr. Privacy',
+      :id => '19530622'
+   }
 }
 
 $IS_A_FRAUD = {
@@ -114,7 +122,7 @@ def perform_access(user, nonce)
         req.headers['Content-Type'] = 'application/json'
         req.headers['accept'] = 'application/json'
         req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
-        req.headers['x-sombra-authorization'] = 'Bearer ' + $SOMBRA_API_KEY
+        req.headers['x-sombra-authorization'] = $SOMBRA_API_KEY ? 'Bearer ' + $SOMBRA_API_KEY : nil
         req.headers['x-transcend-nonce'] = nonce
         req.body = outgoing_request_body.to_json
     end
@@ -147,13 +155,24 @@ end
 # Retrieve public key from Sombra
 # TODO: add authentication headers for multi-tenant Sombra in this example
 def transcend_public_key
-    response = Faraday.get($PUBLIC_KEY_URL)
+    connection = Faraday.new() do |conn|
+      conn.request :authorization, 'Bearer', $TRANSCEND_API_KEY
+      conn.method :get
+    end
+    response = connection.get($PUBLIC_KEY_URL)
     OpenSSL::PKey.read(response.body)
 end
 
 # Retrieve core identifier
 def validate_transcend_webhook(token)
-    options = { algorithm: 'ES384' }
+    options = {
+      algorithm: 'ES384',
+      aud: $AUDIENCE,
+      verify_aud: true,
+    }
     decoded_token = JWT.decode token, transcend_public_key, $VERIFY_JWT, options
+    if decoded_token[0]['scope'] != 'coreIdentifier'
+      raise "Saw unexpected scope in JWT"
+    end
     decoded_token[0]['value']
 end

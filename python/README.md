@@ -17,6 +17,10 @@ Internal system integrations in Python. Check out the parent [README](../README.
 
 ## Installation
 
+If you are in a Codespace, you can run `pip install -r requirements.txt`.
+
+If you are running this locally, ensure you are using python 3.8.x, and then run:
+
 ```sh
 python3 -m venv env
 source ./env/bin/activate

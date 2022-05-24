@@ -21,7 +21,9 @@ export default async function handleDSRWebhook(
   // Verify the incoming webhook is coming from Transcend, and via the Sombra gateway.
   try {
     await verifyWebhook(req.headers['x-sombra-token']);
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    logger.error(`Error occurred validating webhook: ${error?.stack}`);
     // If the webhook doesn't pass verification, reject it.
     return res.status(401).send('You are not Transcend!');
   }

@@ -9,6 +9,7 @@
     - [TRANSCEND_API_KEY](#transcend_api_key)
     - [SOMBRA_API_KEY](#sombra_api_key)
     - [SOMBRA_URL](#sombra_url)
+    - [Audience](#audience)
   - [Languages](#languages)
   - [Try it on Replit](#try-it-on-replit)
 
@@ -41,12 +42,13 @@ Using [ngrok](https://ngrok.com/) you can actually [connect these examples](http
 
 ## Try it in your environment
 
-To configure these examples, you will need to create a file named `.env` and fill it out with your configuration.
+To configure these examples, you will need to create a file named `.env` and fill it out with your configuration, or they can be set as environment variables
 
 ```sh
 TRANSCEND_API_KEY="<TODO>"
 SOMBRA_API_KEY="<TODO>"
 SOMBRA_URL="https://<TODO>.sombra.transcend.io"
+AUDIENCE="<TODO>"
 ```
 
 ### TRANSCEND_API_KEY
@@ -69,6 +71,10 @@ This is the URL of your Sombra gateway.
 - If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`.
 - If you are self-hosting Sombra, you assign this value.
 - If Transcend is hosting the gateway on your behalf in a single-tenant instance, this is `https://<ORGANIZATION_URI>.sombra.transcend.io`.
+
+### Audience
+
+This is the audience that you will verify is set on the incoming JWT. You can find your Organization URI at https://app.transcend.io/settings, which is used as the Audience field.
 
 ## Languages
 

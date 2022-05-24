@@ -15,6 +15,8 @@ import handleDSRWebhook from './handleDSRWebhook';
 
 import handleDSRWebhookPaginated from './handleDSRWebhookPaginated';
 
+import handleHelloWorld from './handleHelloWorld';
+
 // Constants
 import { PORT } from './constants';
 
@@ -46,6 +48,11 @@ app.use(express.json());
  * This path is set by you in the Admin Dashboard.
  */
 app.post('/transcend/enrichment', handleEnrichmentWebhook);
+
+/**
+ * Make the root GET route return a message as a health check.
+ */
+app.get('/', handleHelloWorld);
 
 /**
  * Receive webhook (Transcend's notification to this server)

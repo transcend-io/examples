@@ -5,6 +5,7 @@
 
 - [Typescript](#typescript)
   - [Installation](#installation)
+  - [Build](#build)
   - [Start](#start)
   - [Transcend-internal developer notes](#transcend-internal-developer-notes)
 
