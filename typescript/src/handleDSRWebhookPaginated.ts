@@ -138,8 +138,6 @@ export default async function handleDSRWebhookPaginated(
       break;
 
     case 'ERASURE':
-      // Respond with an early "no user found" signal.
-      // TODO: show an erasure PUT request in this example https://docs.transcend.io/docs/responding-to-dsrs#fulfill-an-erasure-request-dser
       res.sendStatus(204);
       break;
     default:
