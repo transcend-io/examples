@@ -117,6 +117,9 @@ module.exports = asyncHandler(async (req, res) => {
       res.sendStatus(200);
       break;
 
+    case 'ERASURE':
+      res.sendStatus(204);
+      break;
     default:
       logger.warn(
         `This type of DSR webhook is unimplemented - ${req.body.extras.request.link}`,
