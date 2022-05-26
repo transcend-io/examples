@@ -33,7 +33,7 @@ TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always
 VERIFY_JWT = True
 
-# The audience on the JWT to verify. You can find your Organization URI at https://app.staging.transcen.dental/infrastructure/sombra, which is the audience
+# The audience on the JWT to verify. You can find your Organization URI at https://app.transcend.io/infrastructure/sombra, which is the audience
 AUDIENCE = os.environ.get('AUDIENCE')
 
 # Whether to trust self signed certs
