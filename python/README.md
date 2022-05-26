@@ -27,6 +27,25 @@ source ./env/bin/activate
 pip3 install -r requirements.txt
 ```
 
+### HTTPS
+
+In order to run the server with HTTPS enabled, you need to make sure you have your own SSL certificate and private key. If you don't need to have it enabled, you can set the following environment variable:
+
+```sh
+export USE_HTTPS=false
+```
+
+Else you can use your certificate and private key, and set it on the code on main.py file
+
+```python
+   httpd.socket = ssl.wrap_socket(
+      httpd.socket,
+      keyfile="ssl/private.key",
+      certfile='ssl/certificate.pem',
+      server_side=True
+   )
+```
+
 ## Start
 
 ```sh

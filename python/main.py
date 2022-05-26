@@ -92,7 +92,7 @@ def verify_transcend_webhook(headers):
         if decoded.get('scope') != 'coreIdentifier':
             print('Saw unexpected scope "{}" in JWT'.format(decoded.get('scope')))
             raise ValueError()
-        
+
         return decoded.get('value')
     except (DecodeError, InvalidKeyError, InvalidAudienceError, ValueError):
         raise Unauthorized()
@@ -224,8 +224,8 @@ def main():
     if USE_HTTPS:
         httpd.socket = ssl.wrap_socket(
             httpd.socket,
-            keyfile="ssl/private.key",
-            certfile='ssl/certificate.pem',
+            keyfile="../../main/ssl/private.key",
+            certfile='../../main/ssl/certificate.pem',
             server_side=True
         )
 
