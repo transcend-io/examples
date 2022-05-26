@@ -26,7 +26,52 @@ python3 -m venv env
 source ./env/bin/activate
 pip3 install -r requirements.txt
 ```
+## Environment Variables
+### HTTPS
 
+In order to run the server with HTTPS enabled, you need to make sure you have your own SSL certificate and private key. If you don't need to have it enabled, you can set the following environment variable:
+
+```sh
+export USE_HTTPS=false
+```
+
+Else you can use your certificate and private key, and set it on the code on main.py file
+
+```python
+   httpd.socket = ssl.wrap_socket(
+      httpd.socket,
+      keyfile="ssl/private.key",
+      certfile='ssl/certificate.pem',
+      server_side=True
+   )
+```
+
+### AUDIENCE
+
+If you want to verify the JWT token, you need to set the `AUDIENCE` environment variable.
+
+You can find the audience on your Organization URI at https://app.transcend.io/infrastructure/sombra.
+
+### TRANSCEND_API_KEY
+
+This API key authenticates you to Transcend, and you can generate it on the [admin dashboard](https://app.transcend.io/settings#Developer).
+API keys must be scoped to certain operations or data silos.
+
+### SOMBRA_API_KEY
+
+This API key authenticates you to to your Sombra gateway.
+
+- If you're using multi-tenant Sombra (most common) you don't need to set this.
+- If you are self-hosting Sombra, you would have generated this at the time of setup and stored it securely.
+- If Transcend is hosting the gateway on your behalf in a single-tenant instance, you will receive this via a secure channel.
+
+### SOMBRA_URL
+
+This is the URL of your Sombra gateway.
+
+- If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`.
+- If you are self-hosting Sombra, you assign this value.
+- If Transcend is hosting the gateway on your behalf in a single-tenant instance, this is `https://<ORGANIZATION_URI>.sombra.transcend.io`.
 ## Start
 
 ```sh
@@ -39,8 +84,9 @@ Go to [https://localhost:4443](https://localhost:4443)
 
 ## Add to your Data Map
 
-You can test against this example live by adding it to [your Data Map](https://app.transcend.io/data-map/silos?integrationName=server) and using [ngrok](https://ngrok.com/) to map your localhost to a live domain.
+You can test against this example live by adding it to [your Integrations](https://app.transcend.io/infrastructure/integrations/new?integrationName=server) and using [ngrok](https://ngrok.com/) to map your localhost to a live domain.
+
 
 ```sh
-ngrok http -hostname=test-python.ngrok.io 4443
+ngrok http --hostname=test-python.ngrok.io 4443
 ```

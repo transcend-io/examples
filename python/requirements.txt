@@ -1,8 +1,8 @@
 asn1crypto==0.24.0
 astroid==2.2.5
 certifi==2019.3.9
-cffi==1.12.3
-cryptography==3.2
+cffi==1.15.0
+cryptography==37.0.2
 PyJWT==1.7.1
 requests==2.21.0
 urllib3==1.24.2
@@ -17,6 +17,6 @@ pylint==2.3.1
 pyngrok==1.3.7
 PyYAML==5.1
 six==1.12.0
-typed-ast==1.4.2
+typed-ast==1.5.4
 Werkzeug==0.15.4
 wrapt==1.11.1
