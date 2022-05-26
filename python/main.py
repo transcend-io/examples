@@ -224,8 +224,8 @@ def main():
     if USE_HTTPS:
         httpd.socket = ssl.wrap_socket(
             httpd.socket,
-            keyfile="../../main/ssl/private.key",
-            certfile='../../main/ssl/certificate.pem',
+            keyfile="ssl/private.key",
+            certfile='ssl/certificate.pem',
             server_side=True
         )
 
