@@ -52,6 +52,11 @@ MOCK_DATA = {
         'gpa': 1.3,
         'name': 'Mr. Privacy',
         'id': '19530622'
+    },
+    'python@test.com': {
+        'gpa': 1.3,
+        'name': 'DSR Test',
+        'id': '19530623'
     }
 }
 
