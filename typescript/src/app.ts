@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Developer note: this server is live at https://transcend-example.onrender.com.
  * This server is used on the E-Shop-It Transcend instance https://e-shop-it.trsnd.co.
