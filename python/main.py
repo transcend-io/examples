@@ -195,15 +195,10 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
         userIdentifier = body['extras']['profile']['identifier']
 
-        # Determine whether the request should be blocked
-        status = 'COMPILING'
-        if IS_A_FRAUD.get(userIdentifier, False):
-            status = 'ON_HOLD'
-            # status = 'CANCELED'
 
-        # Return 400 if user not found
+        # Return 204 if user not found
         if userIdentifier not in MOCK_DATA:
-            self.send_response(400)
+            self.send_response(204)
             self.end_headers()
             response = io.BytesIO()
             self.wfile.write(response.getvalue())
@@ -213,7 +208,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
         response = io.BytesIO()
-        response.write(bytes(json.dumps({ 'status': status }), 'utf-8'))
+        response.write(bytes(json.dumps({}), 'utf-8'))
         self.wfile.write(response.getvalue())
 
         # Process request async
