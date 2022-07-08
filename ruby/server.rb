@@ -131,9 +131,9 @@ def perform_erasure(user, nonce)
         "profiles": [{
             "profileId": user['id'],
         }],
-        # Indicate that there is no further data being posted
-        "status": "READY"
     }
+
+    # INSERT DELETION LOGIC HERE
 
     # Signal that it has been completed.
     # TODO: make x-sombra-authorization optional in this example
