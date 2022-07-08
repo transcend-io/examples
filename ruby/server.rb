@@ -72,15 +72,11 @@ post '/' do
 
     begin
         validate_transcend_webhook token
-        dsr_status = 'COMPILING'
         user_identifier = payload['extras']['profile']['identifier']
 
 
-        if $IS_A_FRAUD[user_identifier]
-            dsr_status = 'ON_HOLD'
-        elsif ! ($MOCK_DATA.key?(user_identifier))
+        if ! ($MOCK_DATA.key?(user_identifier))
             status 204
-            dsr_status = 'NOT_FOUND'
         else
             user = $MOCK_DATA[user_identifier]
             case payload['type']
@@ -96,10 +92,9 @@ post '/' do
 
     rescue JWT::JWKError, JWT::DecodeError, JWT::InvalidAudError
         status 401
-        dsr_status = 'Unauthorized'
     end
 
-    { 'status': dsr_status}.to_json
+    {}.to_json
 end
 
 
