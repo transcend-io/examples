@@ -45,8 +45,6 @@ $PUBLIC_KEY_URL = $SOMBRA_URL + '/public-keys/sombra-general-signing-key'
 #  @param action_type - The type of action to process i.e. ACCESS | ERASURE | CONTACT_OPT_OUT...
 ###
 def list_pending_requests(data_silo_id, action_type)
-    # resp = Faraday.get($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests?action_type=' + action_type, headers=$headers)
-
     resp = Faraday.post($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests?action_type=' + action_type) do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['accept'] = 'application/json'
@@ -59,6 +57,7 @@ def list_pending_requests(data_silo_id, action_type)
         puts response.request.body
         raise Exception.new "Query failed to run by returning code of #{request.status}"
     end
+end
 
 ###
 # Respond to webhook upon completion
@@ -81,8 +80,26 @@ def notify_completed(identifier, nonce)
       req.body = outgoing_request_body.to_json
     end
     if request.status == 200
-        return True
+      return True
     else
-        puts request.request.body
-        raise Exception.new "Request failed with status code #{request.status}"
+      puts request.request.body
+      raise Exception.new "Request failed with status code #{request.status}"
     end
+end
+
+###
+# Perform the data subject request
+###
+def run_job(identifier, actionType)
+  puts "TODO Implment action #{actionType} for identifier #{identifier}"
+end
+
+while True
+  results = list_pending_requests(DATA_SILO_ID, ACTION_TYPE)
+  puts "Processing: #{len(results)} requests"
+  for result in results
+    run_job(result['identifier'], ACTION_TYPE)
+    notify_completed(result['identifier'], result['nonce'])
+  if len(results) == 0
+    break
+end
