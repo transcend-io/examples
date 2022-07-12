@@ -45,18 +45,21 @@ $PUBLIC_KEY_URL = $SOMBRA_URL + '/public-keys/sombra-general-signing-key'
 #  @param action_type - The type of action to process i.e. ACCESS | ERASURE | CONTACT_OPT_OUT...
 ###
 def list_pending_requests(data_silo_id, action_type)
-    resp = Faraday.post($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests?action_type=' + action_type) do |req|
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['accept'] = 'application/json'
-      req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
-      req.body = outgoing_request_body.to_json
-    end
-    if resp.status == 200
-        return request.json()['items']
-    else
-        puts response.request.body
-        raise Exception.new "Query failed to run by returning code of #{request.status}"
-    end
+  puts 'here'
+  resp = Faraday.post($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests?action_type=' + action_type) do |req|
+    req.headers['Content-Type'] = 'application/json'
+    req.headers['accept'] = 'application/json'
+    req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
+    req.body = outgoing_request_body.to_json
+  end
+  if resp.status == 200
+    # return request.json()['items']
+    return True
+  else
+    # puts response.request.body
+    puts 'Status equal to 500'
+    raise Exception.new "Query failed to run by returning code of #{request.status}"
+  end
 end
 
 ###
@@ -65,41 +68,42 @@ end
 # @param nonce - The nonce to respond to
 ###
 def notify_completed(identifier, nonce)
-    # Notify success
-    outgoing_request_body = {
-        "profiles": [{
-            "profileId": identifier,
-        }],
-    }
+  # Notify success
+  outgoing_request_body = {
+    "profiles": [{
+      "profileId": identifier,
+    }],
+  }
 
-    merged = dict({ "x-transcend-nonce": nonce })
-    merged.update(headers)
+  merged = dict({ "x-transcend-nonce": nonce })
+  merged.update(headers)
 
-    resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
-      req.headers['x-transcend-nonce'] = nonce
-      req.body = outgoing_request_body.to_json
-    end
-    if request.status == 200
-      return True
-    else
-      puts request.request.body
-      raise Exception.new "Request failed with status code #{request.status}"
-    end
+  resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
+    req.headers['x-transcend-nonce'] = nonce
+    req.body = outgoing_request_body.to_json
+  end
+  if request.status == 200
+    return True
+  else
+    puts 'Status different from 200'
+    # puts request.request.body
+    raise Exception.new "Request failed with status code #{request.status}"
+  end
 end
 
-###
-# Perform the data subject request
-###
-def run_job(identifier, actionType)
-  puts "TODO Implment action #{actionType} for identifier #{identifier}"
-end
+# ###
+# # Perform the data subject request
+# ###
+# def run_job(identifier, actionType)
+#   puts "TODO Implment action #{actionType} for identifier #{identifier}"
+# end
 
-while True
-  results = list_pending_requests(DATA_SILO_ID, ACTION_TYPE)
-  puts "Processing: #{len(results)} requests"
-  for result in results
-    run_job(result['identifier'], ACTION_TYPE)
-    notify_completed(result['identifier'], result['nonce'])
-  if len(results) == 0
-    break
-end
+# while True
+#   results = list_pending_requests(DATA_SILO_ID, ACTION_TYPE)
+#   puts "Processing: #{len(results)} requests"
+#   for result in results
+#     run_job(result['identifier'], ACTION_TYPE)
+#     notify_completed(result['identifier'], result['nonce'])
+#   if len(results) == 0
+#     break
+# end
