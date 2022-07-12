@@ -27,7 +27,7 @@ $DATA_SILO_ID = "TODO"
 # Headers used to authenticate to sombra and transcend
 ###
 $headers = {
-    'Authorization': 'Bearer ' + TRANSCEND_API_KEY,
+  'Authorization': 'Bearer ' + TRANSCEND_API_KEY,
 }
 $SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
 
