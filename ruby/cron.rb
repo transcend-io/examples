@@ -27,7 +27,7 @@ $DATA_SILO_ID = "TODO"
 # Headers used to authenticate to sombra and transcend
 ###
 $headers = {
-  'Authorization': 'Bearer ' + TRANSCEND_API_KEY,
+  'Authorization': 'Bearer ' + $TRANSCEND_API_KEY,
 }
 $SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
 
@@ -71,7 +71,7 @@ def notify_completed(identifier, nonce)
   }
 
   merged = dict({ "x-transcend-nonce": nonce })
-  merged.update(headers)
+  merged.update($headers)
 
   resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
     req.headers['x-transcend-nonce'] = nonce
