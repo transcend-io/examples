@@ -1,6 +1,4 @@
 require 'faraday'
-require 'sinatra'
-require 'jwt'
 require 'dotenv'
 
 Dotenv.load('../.env')
@@ -94,16 +92,18 @@ end
 # ###
 # # Perform the data subject request
 # ###
-# def run_job(identifier, actionType)
-#   puts "TODO Implment action #{actionType} for identifier #{identifier}"
-# end
+def run_job(identifier, actionType)
+  puts "TODO Implment action #{actionType} for identifier #{identifier}"
+end
 
-# while True
-#   results = list_pending_requests(DATA_SILO_ID, ACTION_TYPE)
-#   puts "Processing: #{len(results)} requests"
-#   for result in results
-#     run_job(result['identifier'], ACTION_TYPE)
-#     notify_completed(result['identifier'], result['nonce'])
-#   if len(results) == 0
-#     break
-# end
+loop do
+  results = list_pending_requests($DATA_SILO_ID, $ACTION_TYPE)
+  puts "Processing: #{results.length()} requests"
+  for result in results
+    run_job(result['identifier'], $ACTION_TYPE)
+    notify_completed(result['identifier'], result['nonce'])
+  end
+  if results.length() == 0
+    break
+  end
+end
