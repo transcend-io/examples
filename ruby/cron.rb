@@ -49,14 +49,13 @@ def list_pending_requests(data_silo_id, action_type)
     req.headers['accept'] = 'application/json'
     req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
     req.body = outgoing_request_body.to_json
+    req.response :json
   end
   if resp.status == 200
-    # return request.json()['items']
-    return True
+    return resp.get('json').body['items']
   else
-    # puts response.request.body
-    puts 'Status equal to 500'
-    raise Exception.new "Query failed to run by returning code of #{request.status}"
+    return resp.get('json').body
+    raise Exception.new "Query failed to run by returning code of #{resp.status}"
   end
 end
 
@@ -79,13 +78,13 @@ def notify_completed(identifier, nonce)
   resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
     req.headers['x-transcend-nonce'] = nonce
     req.body = outgoing_request_body.to_json
+    req.response :json
   end
-  if request.status == 200
+  if resp.status == 200
     return True
   else
-    puts 'Status different from 200'
-    # puts request.request.body
-    raise Exception.new "Request failed with status code #{request.status}"
+    puts resp.get('json').body
+    raise Exception.new "Request failed with status code #{resp.status}"
   end
 end
 
