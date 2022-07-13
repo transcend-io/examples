@@ -81,6 +81,7 @@ def notify_completed(identifier, nonce)
     # req.headers['x-sombra-authorization'] = 'Bearer ' + $SOMBRA_API_KEY
   end
   if resp.status == 200
+    puts 'Notify completed with status 200'
     return true
   else
     puts resp.body
