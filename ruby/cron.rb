@@ -33,7 +33,6 @@ $ACTION_TYPE = "ACCESS"
 ###
 $DATA_SILO_ID = "TODO"
 
-
 # URLS
 $DATA_SILO_PATH = $SOMBRA_URL + '/v1/data-silo'
 $TRANSCEND_WEBHOOK_URL = $SOMBRA_URL + '/v1/data-silo'
@@ -46,18 +45,17 @@ $PUBLIC_KEY_URL = $SOMBRA_URL + '/public-keys/sombra-general-signing-key'
 #  @param action_type - The type of action to process i.e. ACCESS | ERASURE | CONTACT_OPT_OUT...
 ###
 def list_pending_requests(data_silo_id, action_type)
-  puts 'here'
   resp = Faraday.get($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests/' + action_type) do |req|
     req.headers['Content-Type'] = 'application/json'
     req.headers['accept'] = 'application/json'
     req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
-    # If the sombra api key is set, use it
+    ## If the sombra api key is set, use it
     # req.headers['x-sombra-authorization'] = 'Bearer ' + $SOMBRA_API_KEY
   end
   if resp.status == 200
-    return resp.body.to_json['items']
+    return JSON.parse(resp.body)['items']
   else
-    puts resp.body.to_json
+    puts resp.body
     raise Exception.new "Query failed to run by returning code of #{resp.status}"
   end
 end
@@ -75,14 +73,17 @@ def notify_completed(identifier, nonce)
     }],
   }
 
-
-  resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
+  resp = Faraday.put($SOMBRA_URL + "/v1/data-silo", outgoing_request_body.to_json) do |req|
     req.headers['x-transcend-nonce'] = nonce
+    req.headers['Content-Type'] = 'application/json'
+    req.headers['accept'] = 'application/json'
+    req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
+    # req.headers['x-sombra-authorization'] = 'Bearer ' + $SOMBRA_API_KEY
   end
   if resp.status == 200
-    return True
+    return true
   else
-    puts resp.body.to_json
+    puts resp.body
     raise Exception.new "Request failed with status code #{resp.status}"
   end
 end
@@ -91,7 +92,7 @@ end
 # # Perform the data subject request
 # ###
 def run_job(identifier, actionType)
-  puts "TODO Implment action #{actionType} for identifier #{identifier}"
+  puts "TODO Implement action #{actionType} for identifier #{identifier}"
 end
 
 loop do
