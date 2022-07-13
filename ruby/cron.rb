@@ -14,22 +14,25 @@ Dotenv.load('../.env')
 $TRANSCEND_API_KEY = ENV["TRANSCEND_API_KEY"]
 
 ###
+# Sombra URL. Change if you are not using multi-tenant
+###
+$SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
+
+###
+# API key for sombra if you are not using multi-tenant
+###
+$SOMBRA_API_KEY = ENV["SOMBRA_API_KEY"]
+
+###
 # DSR action to process. See event keys here: https://docs.transcend.io/docs/data-subject-requests#data-actions
 ####
-$ACTION_TYPE = "ERASURE"
+$ACTION_TYPE = "ACCESS"
 
 ###
 # ID of the data silo to process (found in the URL https://app.transcend.io/data-map/silo/<data-silo-id>)
 ###
 $DATA_SILO_ID = "TODO"
 
-###
-# Headers used to authenticate to sombra and transcend
-###
-$headers = {
-  'Authorization': 'Bearer ' + $TRANSCEND_API_KEY,
-}
-$SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
 
 # URLS
 $DATA_SILO_PATH = $SOMBRA_URL + '/v1/data-silo'
@@ -44,10 +47,12 @@ $PUBLIC_KEY_URL = $SOMBRA_URL + '/public-keys/sombra-general-signing-key'
 ###
 def list_pending_requests(data_silo_id, action_type)
   puts 'here'
-  resp = Faraday.post($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests?action_type=' + action_type) do |req|
+  resp = Faraday.get($DATA_SILO_PATH + '/' + data_silo_id + '/pending-requests/' + action_type) do |req|
     req.headers['Content-Type'] = 'application/json'
     req.headers['accept'] = 'application/json'
     req.headers['Authorization'] = 'Bearer ' + $TRANSCEND_API_KEY
+    # If the sombra api key is set, use it
+    # req.headers['x-sombra-authorization'] = 'Bearer ' + $SOMBRA_API_KEY
   end
   if resp.status == 200
     return resp.body.to_json['items']
@@ -70,12 +75,9 @@ def notify_completed(identifier, nonce)
     }],
   }
 
-  merged = dict({ "x-transcend-nonce": nonce })
-  merged.update($headers)
 
   resp = Faraday.post($SOMBRA_URL + "/v1/data-silo") do |req|
     req.headers['x-transcend-nonce'] = nonce
-    req.body = outgoing_request_body.to_json
   end
   if resp.status == 200
     return True
