@@ -52,3 +52,12 @@ You can test against this example live by adding it to [your Data Map](https://a
 ```sh
 ngrok http -hostname=test-ruby.ngrok.io 4567
 ```
+## Cron example
+
+You can run the following command:
+
+```sg
+ruby cron.rb
+```
+
+Or you can just fork the repl located in [this page](https://replit.com/@GiulianoGiacag1/Ruby-Cron-Example-Transcend)
