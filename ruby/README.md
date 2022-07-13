@@ -60,4 +60,4 @@ You can run the following command:
 ruby cron.rb
 ```
 
-Or you can just fork the repl located in [this page](https://replit.com/@GiulianoGiacag1/Ruby-Cron-Example-Transcend)
+Or you can just fork the repl located in [this page](https://replit.com/@GiulianoGiacag1/Ruby-Cron-Example-Transcend).
