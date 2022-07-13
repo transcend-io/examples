@@ -41,7 +41,7 @@ Respond to webhook upon completion
 @param identifier - the identifier being responded to
 @param nonce - The nonce to respond to
 """
-def notify_compelted(identifier, nonce):
+def notify_completed(identifier, nonce):
     # Notify success
     outgoing_request_body = {
         "profiles": [{
@@ -77,7 +77,7 @@ def main():
         print("Processing: {} requests".format(len(results)))
         for result in results:
             run_job(result['identifier'], ACTION_TYPE)
-            notify_compelted(result['identifier'], result['nonce'])
+            notify_completed(result['identifier'], result['nonce'])
 
         if len(results) == 0:
             break
