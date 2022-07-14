@@ -8,6 +8,7 @@
   - [Start](#start)
   - [Open the browser](#open-the-browser)
   - [Add to your Data Map](#add-to-your-data-map)
+  - [Cron example](#cron-example)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -52,3 +53,12 @@ You can test against this example live by adding it to [your Data Map](https://a
 ```sh
 ngrok http -hostname=test-ruby.ngrok.io 4567
 ```
+## Cron example
+
+You can run the following command:
+
+```sg
+ruby cron.rb
+```
+
+Or you can just fork the repl located in [this page](https://replit.com/@GiulianoGiacag1/Ruby-Cron-Example-Transcend).
