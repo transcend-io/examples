@@ -8,6 +8,7 @@
   - [Start](#start)
   - [Open the browser](#open-the-browser)
   - [Add to your Data Map](#add-to-your-data-map)
+  - [Cron example](#cron-example)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
