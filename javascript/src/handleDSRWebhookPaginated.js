@@ -53,6 +53,7 @@ async function scheduleAccessChunkedRequest(
         offset,
       });
       hasMore = data.length === PAGE_SIZE;
+      logger.info('Uploading chunk for page: ', i);
       await got.post({
         url: `${SOMBRA_URL}/v1/datapoint-chunked`,
         headers: {
@@ -71,6 +72,7 @@ async function scheduleAccessChunkedRequest(
           isLastPage: !hasMore,
         },
       });
+      logger.info('Uploaded chunk for page: ', i);
       offset += PAGE_SIZE;
       i += 1;
       logger.info(`Sent page ${i}`);
