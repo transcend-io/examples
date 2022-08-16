@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler');
 
 // Helpers
 const { verifyWebhook } = require('./helpers');
+const scheduleAccessRequest = require('./scheduleAccessRequest');
 
 // Constants
 const {
@@ -111,7 +112,12 @@ module.exports = asyncHandler(async (req, res) => {
   switch (webhookType) {
     case 'ACCESS':
       // Schedule the job to run. Results of the job are sent to Transcend separately (in a different HTTP request, in case the job is slow).
-      scheduleAccessChunkedRequest(
+      // scheduleAccessChunkedRequest(
+      //   userIdentifier,
+      //   nonce,
+      //   req.body.extras.request.link,
+      // );
+      scheduleAccessRequest(
         userIdentifier,
         nonce,
         req.body.extras.request.link,
