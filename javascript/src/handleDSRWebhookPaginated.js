@@ -62,6 +62,7 @@ async function scheduleAccessChunkedRequest(
             : undefined,
           'x-transcend-nonce': nonce,
           'content-type': 'application/json',
+          'x-transcend-datapoint-name': 'friends',
         },
         json: {
           fileId: `Page ${i} -- ${offset} - ${offset + data.length}`,
@@ -76,6 +77,7 @@ async function scheduleAccessChunkedRequest(
     }
     logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
+    logger.info('Handle DSR paginated error');
     logger.error(`Failed to upload data - ${requestLink} - ${error.message}`);
   }
 }

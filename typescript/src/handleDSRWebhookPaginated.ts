@@ -73,7 +73,6 @@ async function scheduleAccessChunkedRequest(
             : undefined,
           'x-transcend-nonce': nonce,
           'content-type': 'application/json',
-          'x-transcend-datapoint-name': 'friends',
         },
         json: {
           fileId: `Page ${i} -- ${offset} - ${offset + data.length}`,
@@ -89,7 +88,6 @@ async function scheduleAccessChunkedRequest(
     logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
     const typedError = error as Error;
-    logger.error('Error uploading paginated data');
     logger.error(
       `Failed to upload data - ${requestLink} - ${typedError.message}`,
     );
