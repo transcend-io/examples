@@ -117,11 +117,13 @@ module.exports = asyncHandler(async (req, res) => {
       //   nonce,
       //   req.body.extras.request.link,
       // );
+      logger.info('Scheduling access request');
       scheduleAccessRequest(
         userIdentifier,
         nonce,
         req.body.extras.request.link,
       );
+      logger.info('Access request scheduled');
 
       // Respond OK - webhook received properly.
       res.sendStatus(200);
