@@ -77,7 +77,7 @@ async function scheduleAccessChunkedRequest(
     }
     logger.info(`Successfully uploaded data - ${requestLink}`);
   } catch (error) {
-    logger.info('Handle DSR paginated error');
+    logger.info('Error:', JSON.stringify(error));
     logger.error(`Failed to upload data - ${requestLink} - ${error.message}`);
   }
 }
