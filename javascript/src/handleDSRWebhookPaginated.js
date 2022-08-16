@@ -165,8 +165,10 @@ module.exports = asyncHandler(async (req, res) => {
         req.body.extras.request.link,
       );
 
+      logger.info(`After checking type: ${webhookType}`);
       // Respond OK - webhook received properly.
       res.sendStatus(200);
+      logger.info('Responded OK');
       break;
 
     case 'ERASURE':
