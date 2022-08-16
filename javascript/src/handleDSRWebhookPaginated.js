@@ -154,6 +154,7 @@ module.exports = asyncHandler(async (req, res) => {
   const webhookType = req.body.type; // ACCESS, ERASURE, etc: https://docs.transcend.io/docs/receiving-webhooks#events
   const nonce = req.headers['x-transcend-nonce'];
 
+  logger.info(`Before checking type: ${webhookType}`);
   // Depending on the type of webhook, respond accordingly.
   switch (webhookType) {
     case 'ACCESS':
