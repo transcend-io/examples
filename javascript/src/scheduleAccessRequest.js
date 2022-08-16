@@ -34,7 +34,7 @@ module.exports = async function scheduleAccessRequest(
   // Find user data
   const userData = await lookUpUser(userIdentifier);
 
-  console.log('NORMAL ACCESS REQUEST');
+  logger.info('NORMAL ACCESS REQUEST');
   // Upload in bulk to datapoints, with a JSON payload
   const bulkUpload = got.post(`${SOMBRA_URL}/v1/data-silo`, {
     headers: {
@@ -71,7 +71,7 @@ module.exports = async function scheduleAccessRequest(
 
   const fileUploadPipeline = await pipeline(readFile, fileUpload);
 
-  console.log('AFTER NORMAL ACCESS REQUEST');
+  logger.info('AFTER NORMAL ACCESS REQUEST');
   try {
     await Promise.all([bulkUpload, fileUploadPipeline]);
     logger.info(`Successfully uploaded data - ${requestLink}`);
