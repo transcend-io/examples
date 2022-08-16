@@ -9,6 +9,7 @@ const pipeline = promisify(stream.pipeline);
 
 // Helpers
 const { verifyWebhook } = require('./helpers');
+const { lookUpUser } = require('./helpers');
 
 // Constants
 const {
