@@ -59,6 +59,10 @@ app.get('/image-tracker.jpeg', (req, res, next) => {
     // Update the cookie for the unique run
     logger.info(`Setting the cookie: uniqueRunId=${uniqueRunId}`);
     res.cookie('uniqueRunId', uniqueRunId, { maxAge: 900000 });
+    res.cookie('uniqueRunIdHttpOnly', uniqueRunId, {
+      maxAge: 900000,
+      httpOnly: true,
+    });
 
     // Update a view count for user to track the number of times
     // they visited this page
@@ -67,6 +71,10 @@ app.get('/image-tracker.jpeg', (req, res, next) => {
       : 0;
     logger.info(`Setting: viewCount=${viewCount + 1}`);
     res.cookie('viewCount', viewCount + 1, { maxAge: 900000 });
+    res.cookie('viewCountHttpOnly', viewCount + 1, {
+      maxAge: 900000,
+      httpOnly: true,
+    });
 
     // Create a unique session id for the requesting user.
     // Only create a new session ID if one is not provided
@@ -77,7 +85,10 @@ app.get('/image-tracker.jpeg', (req, res, next) => {
       logger.info(
         `Setting a unique HTTP-only session to identify this user: sessionId=${sessionId}`,
       );
-      res.cookie('sessionId', sessionId, { maxAge: 900000, httpOnly: true });
+      res.cookie('sessionIdHttpOnly', sessionId, {
+        maxAge: 900000,
+        httpOnly: true,
+      });
     }
 
     // Resolve the image like nothing else above happened
