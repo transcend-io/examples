@@ -23,6 +23,6 @@
     "@types/cookie": "^0",
     "@types/cors": "^2",
     "concurrently": "^7.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   }
 }
