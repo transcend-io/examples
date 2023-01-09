@@ -1,6 +1,6 @@
 {
   "name": "@transcend-io/trackers-demo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Example of how basic cookie tracking works",
   "main": "src/server.js",
   "scripts": {
