@@ -1,6 +1,6 @@
 {
   "name": "@transcend-io/examples-javascript",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Example of an application integrated with Transcend.",
   "main": "src/app.js",
   "scripts": {
@@ -21,6 +21,6 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   }
 }

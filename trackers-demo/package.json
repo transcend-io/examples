@@ -1,6 +1,6 @@
 {
   "name": "@transcend-io/trackers-demo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Example of how basic cookie tracking works",
   "main": "src/server.js",
   "scripts": {
@@ -23,6 +23,6 @@
     "@types/cookie": "^0",
     "@types/cors": "^2",
     "concurrently": "^7.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   }
 }
