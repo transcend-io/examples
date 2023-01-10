@@ -1,6 +1,6 @@
 asn1crypto==0.24.0
 astroid==2.2.5
-certifi==2019.3.9
+certifi==2022.12.7
 cffi==1.15.0
 cryptography==37.0.2
 PyJWT==2.4.0
