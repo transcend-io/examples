@@ -54,27 +54,28 @@ AUDIENCE="<TODO>"
 ### TRANSCEND_API_KEY
 
 This API key authenticates you to Transcend, and you can generate it on the [admin dashboard](https://app.transcend.io/settings#Developer).
-API keys must be scoped to certain operations or data silos.
+API keys must be scoped to the proper integration that you are responding to.
 
 ### SOMBRA_API_KEY
 
 This API key authenticates you to to your Sombra gateway.
 
-- If you're using multi-tenant Sombra (most common) you don't need to set this.
+- If you're using "Transcend Hosted - Multi Tenant" Sombra (most common) you don't need to set this.
 - If you are self-hosting Sombra, you would have generated this at the time of setup and stored it securely.
-- If Transcend is hosting the gateway on your behalf in a single-tenant instance, you will receive this via a secure channel.
+- If Transcend is hosting the gateway on your behalf in a single-tenant instance, you should reach out to your account manager to get this key.
+
+You can see which version of the Sombra Gateway you are using by visiting [Infrastructure -> Sombra](https://app.transcend.io/infrastructure/sombra/sombras) settings in the Admin Dashboard.
 
 ### SOMBRA_URL
 
-This is the URL of your Sombra gateway.
+This is the URL of your Sombra gateway. You can find your URL by visiting [Infrastructure -> Sombra](https://app.transcend.io/infrastructure/sombra/sombras) settings in the Admin Dashboard. This URL is the value titled "CUSTOMER INGRESS URL".
 
-- If you're using multi-tenant Sombra (most common), this is `https://multi-tenant.sombra.transcend.io`.
-- If you are self-hosting Sombra, you assign this value.
-- If Transcend is hosting the gateway on your behalf in a single-tenant instance, this is `https://<ORGANIZATION_URI>.sombra.transcend.io`.
+<img width="1386" alt="Screenshot 2023-02-19 at 2 00 52 PM" src="https://user-images.githubusercontent.com/10264973/219977722-8c15be4d-2508-4090-b06a-0fbfa55c2d7b.png">
+
 
 ### Audience
 
-This is the audience that you will verify is set on the incoming JWT. You can find your Organization URI at https://app.transcend.io/settings, which is used as the Audience field.
+This is the audience that you will verify is set on the incoming Json Web Tokens (JWTs). You can find your Sombra audience under [Infrastructure -> Sombra](https://app.transcend.io/infrastructure/sombra/sombras) in the Admin Dashboard. This URL is the value titled "SOMBRA AUDIENCE".
 
 ## Languages
 
