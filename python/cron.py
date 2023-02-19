@@ -21,6 +21,13 @@ Headers used to authenticate to sombra and transcend
 headers = {
     "Authorization": "Bearer " + TRANSCEND_API_KEY,
 }
+
+"""
+URL of your Sombra Gateway.
+You can find this value under "Customer Ingress URL"
+under your Infrastructure -> Sombra settings
+https://app.transcend.io/infrastructure/sombra/sombras
+"""
 SOMBRA_URL = "https://multi-tenant.sombra.transcend.io"
 
 """

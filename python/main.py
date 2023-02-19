@@ -24,7 +24,12 @@ TRANSCEND_API_KEY = os.environ.get('TRANSCEND_API_KEY', '4ff241e61c60288babed500
 # The API to use with the sombra instance that encrypts the data before hitting Transcends servers THIS IS A SECRET, STORE SAFELY AND CYCLE REGULARLY
 SOMBRA_API_KEY = os.environ.get('SOMBRA_API_KEY')
 
-# The url of the sombra instance
+"""
+URL of your Sombra Gateway.
+You can find this value under "Customer Ingress URL"
+under your Infrastructure -> Sombra settings
+https://app.transcend.io/infrastructure/sombra/sombras
+"""
 SOMBRA_URL = os.environ.get('SOMBRA_URL', 'https://multi-tenant.sombra.transcend.io')
 
 # The url to respond to webhooks with
@@ -33,7 +38,12 @@ TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always
 VERIFY_JWT = True
 
-# The audience on the JWT to verify. You can find your Organization URI at https://app.transcend.io/infrastructure/sombra, which is the audience
+"""
+The audience used to verify Json Web Tokens (JWTs)
+You can find this value under "Sombra Audience"
+under your Infrastructure -> Sombra settings
+https://app.transcend.io/infrastructure/sombra/sombras
+"""
 AUDIENCE = os.environ.get('AUDIENCE')
 
 # Whether to trust self signed certs
