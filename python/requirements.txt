@@ -1,10 +1,10 @@
 asn1crypto==0.24.0
 astroid==2.2.5
-certifi==2019.3.9
+certifi==2023.7.22
 cffi==1.15.0
 cryptography==37.0.2
 PyJWT==2.4.0
-requests==2.21.0
+requests==2.31.0
 urllib3==1.24.2
 chardet==3.0.4
 future==0.17.1
