@@ -50,7 +50,7 @@ Else you can use your certificate and private key, and set it on the code on mai
 
 If you want to verify the JWT token, you need to set the `AUDIENCE` environment variable.
 
-You can find the audience on your Organization URI at https://app.transcend.io/infrastructure/sombra.
+You can find the audience on your Organization URI at https://app.transcend.io/infrastructure/sombra/sombras.
 
 ### TRANSCEND_API_KEY
 
