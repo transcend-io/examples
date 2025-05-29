@@ -1,7 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-> Try **Custom Functions** 
+> Try [**Custom Functions**](https://docs.transcend.io/docs/articles/integrations/custom/custom-functions)
 >
 > Custom Functions are serverless functions that execute on Sombra as part of a workflow. Unlike webhooks, Custom Functions require zero infrastructure to set up. Just write your code, and publish. With Custom Functions, you can easily extend Transcend's integration functionality to connect to any API or home-grown system.
 
