@@ -1,13 +1,18 @@
 name: ci
 on: push
 
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+
 jobs:
   run-depcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: 14.x
       - run: yarn install --immutable
@@ -21,7 +26,7 @@ jobs:
           fetch-depth: 100 # need the history to do a changed files check below (source, origin)
       - uses: actions/setup-python@v2
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: 14.x
       - run: yarn install --immutable
@@ -34,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: 14.x
       - run: yarn install --immutable
@@ -55,14 +60,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
           node-version: '14.x'
-      - name: Configure NPM authentication
-        run: |
-          yarn config set npmAlwaysAuth true
-          yarn config set npmAuthToken ${{ secrets.NPM_TOKEN }}
+      # See: https://docs.npmjs.com/trusted-publishers
+      # See: https://github.com/actions/setup-node/issues/1445
+      - name: Set npm to version that supports trusted publishers
+        run: npm install -g npm@11.5.1
+        shell: bash
       - name: Publish to yarn/npm
+        env:
+          NODE_AUTH_TOKEN: ""
         run: yarn && cd typescript && yarn npm publish
 
   build-to-github-packages:
@@ -75,7 +83,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
           node-version: '14.x'
       - name: Install dependencies
