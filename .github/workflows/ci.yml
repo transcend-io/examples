@@ -63,14 +63,13 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
       # See: https://docs.npmjs.com/trusted-publishers
       # See: https://github.com/actions/setup-node/issues/1445
       - name: Set npm to version that supports trusted publishers
         run: npm install -g npm@11.5.1
         shell: bash
       - name: Publish to yarn/npm
-        env:
-          NODE_AUTH_TOKEN: ""
         run: yarn && cd typescript && yarn npm publish
 
   build-to-github-packages:
