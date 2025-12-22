@@ -5,6 +5,12 @@
 
 - [Python](#python)
   - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+    - [HTTPS](#https)
+    - [AUDIENCE](#audience)
+    - [TRANSCEND_API_KEY](#transcend_api_key)
+    - [SOMBRA_API_KEY](#sombra_api_key)
+    - [SOMBRA_URL](#sombra_url)
   - [Start](#start)
   - [Open the browser](#open-the-browser)
   - [Add to your Data Map](#add-to-your-data-map)

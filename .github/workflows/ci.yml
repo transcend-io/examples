@@ -1,15 +1,20 @@
 name: ci
 on: push
 
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+
 jobs:
   run-depcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
         with:
-          node-version: 14.x
+          node-version: 22.x
       - run: yarn install --immutable
       - run: yarn depcheck
 
@@ -20,12 +25,12 @@ jobs:
         with:
           fetch-depth: 100 # need the history to do a changed files check below (source, origin)
       - uses: actions/setup-python@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
         with:
-          node-version: 14.x
+          node-version: 22.x
       - run: yarn install --immutable
-      - uses: pre-commit/action@v2.0.2
+      - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --source ${{ github.event.pull_request.base.sha || 'HEAD~1' }} --origin ${{ github.event.pull_request.head.sha || 'HEAD' }}
 
@@ -33,10 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
         with:
-          node-version: 14.x
+          node-version: 22.x
       - run: yarn install --immutable
       - name: Build the typescript code
         run: cd typescript && yarn && yarn build
@@ -55,15 +60,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: '14.x'
-      - name: Configure NPM authentication
-        run: |
-          yarn config set npmAlwaysAuth true
-          yarn config set npmAuthToken ${{ secrets.NPM_TOKEN }}
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Publish to yarn/npm
-        run: yarn && cd typescript && yarn npm publish
+        run: yarn && cd typescript && yarn npm publish --provenance
 
   build-to-github-packages:
     if: github.ref == 'refs/heads/main'
@@ -75,9 +77,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: '14.x'
+          node-version: '22.x'
       - name: Install dependencies
         run: yarn
       - name: Configure Github Packages authentication
