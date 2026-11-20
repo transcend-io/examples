@@ -23,6 +23,19 @@
   };
 
   /**
+   * Escape a value for use inside a double-quoted HTML attribute.
+   * @param value
+   */
+  function escapeHtmlAttr(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  /**
    * @param pathname
    */
   function modeFromPathname(pathname) {
@@ -52,10 +65,13 @@
   }
 
   const src = `${config.CDN_ORIGIN}/cm/${config.BUNDLE_ID}/airgap.js`;
+  let attrString = '';
+  for (let i = 0; i < attributes.length; i += 1) {
+    const attribute = attributes[i];
+    attrString += ` ${attribute.name}="${escapeHtmlAttr(attribute.value)}"`;
+  }
   const tag =
-    `<script src="${src}"${attributes
-      .map((a) => ` ${a.name}="${a.value}"`)
-      .join('')}></` + 'script>';
+    `<script src="${escapeHtmlAttr(src)}"${attrString}></` + 'script>';
 
   window.AIRGAP_DEMO_LOAD = {
     status: 'requested',

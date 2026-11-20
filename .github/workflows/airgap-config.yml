@@ -24,6 +24,7 @@ env:
 jobs:
   dry-run:
     # Fork pull requests and Dependabot do not receive repository secrets.
+    # Skip when the demo org key is not configured yet.
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
@@ -41,6 +42,7 @@ jobs:
           npm exec --yes --package="$TRANSCEND_CLI" -- transcend inventory push
           --file=airgap-security-demo/transcend.yml
           --transcendUrl="$TRANSCEND_URL"
+          --auth="$TRANSCEND_API_KEY"
           --dryRun
 
   deploy:
@@ -61,6 +63,7 @@ jobs:
           npm exec --yes --package="$TRANSCEND_CLI" -- transcend inventory push
           --file=airgap-security-demo/transcend.yml
           --transcendUrl="$TRANSCEND_URL"
+          --auth="$TRANSCEND_API_KEY"
       - name: Deploy the consent manager bundle
         env:
           TRANSCEND_API_KEY: ${{ secrets.TRANSCEND_API_KEY }}
@@ -68,4 +71,5 @@ jobs:
           npm exec --yes --package="$TRANSCEND_CLI" -- transcend consent update-consent-manager
           --bundleTypes=PRODUCTION,TEST
           --deploy
+          --auth="$TRANSCEND_API_KEY"
           --transcendUrl="$TRANSCEND_URL"
