@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="data:," />
     <!-- Airgap must be the first script that runs. -->
+    <!-- airgap.js options: data-csp="allow-known-hosts allow-subdomains" data-regulate-navigation="on" -->
     <script src="../src/config.js"></script>
-    <script
-      src="../src/load-airgap.js"
-      data-csp="allow-known-hosts allow-subdomains"
-      data-regulate-navigation="on"
-    ></script>
+    <script src="../src/load-airgap.js"></script>
     <link rel="stylesheet" href="../src/styles.css" />
   </head>
   <body data-mode="navigation">
