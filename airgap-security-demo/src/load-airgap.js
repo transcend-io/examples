@@ -10,6 +10,13 @@
  * adds the bundle ID from config.js, so the HTML pages need no edit.
  */
 (function () {
+  function escapeHtmlAttribute(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
   const loader = document.currentScript;
   const config = window.AIRGAP_DEMO_CONFIG;
   const attributes = [];
@@ -29,10 +36,12 @@
     return;
   }
 
-  const src = `${config.CDN_ORIGIN}/cm/${config.BUNDLE_ID}/airgap.js`;
+  const src = escapeHtmlAttribute(
+    `${config.CDN_ORIGIN}/cm/${config.BUNDLE_ID}/airgap.js`,
+  );
   const tag =
     `<script src="${src}"${attributes
-      .map((a) => ` ${a.name}="${a.value}"`)
+      .map((a) => ` ${a.name}="${escapeHtmlAttribute(a.value)}"`)
       .join('')}></` + 'script>';
 
   window.AIRGAP_DEMO_LOAD = {

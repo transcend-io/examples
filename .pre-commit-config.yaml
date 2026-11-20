@@ -37,6 +37,6 @@ repos:
         name: Eslint
         description: 'Run static code linting'
         entry: yarn lint --fix
-        language: node
+        language: system
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
         types: [file]

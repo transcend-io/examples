@@ -26,7 +26,8 @@ jobs:
     # Fork pull requests and Dependabot do not receive repository secrets.
     if: >-
       github.event_name == 'pull_request' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      secrets.TRANSCEND_API_KEY != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,7 +44,10 @@ jobs:
           --dryRun
 
   deploy:
-    if: github.event_name == 'push' && github.repository == 'transcend-io/examples'
+    if: >-
+      github.event_name == 'push' &&
+      github.repository == 'transcend-io/examples' &&
+      secrets.TRANSCEND_API_KEY != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
