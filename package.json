@@ -18,6 +18,7 @@
     "prepublish": "yarn build"
   },
   "workspaces": [
+    "airgap-security-demo",
     "javascript",
     "trackers-demo",
     "typescript"

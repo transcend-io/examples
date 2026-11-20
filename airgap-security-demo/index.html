@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Transcend Airgap security demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <h1>Transcend Airgap security demo</h1>
+    <p>
+      See what Transcend Airgap (airgap.js) stops in the browser. The same four
+      scenarios run in four modes.
+    </p>
+    <ul>
+      <li><a href="off/">off</a>: no Airgap. Every scenario succeeds.</li>
+      <li>
+        <a href="report-only/">report-only</a>: Airgap watches and blocks
+        nothing.
+      </li>
+      <li>
+        <a href="block/">block</a>: unknown hosts are blocked, with the
+        generated Content Security Policy.
+      </li>
+      <li>
+        <a href="navigation/">navigation</a>: block plus navigation control.
+      </li>
+    </ul>
+  </body>
+</html>

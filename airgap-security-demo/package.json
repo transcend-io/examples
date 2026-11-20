@@ -1,0 +1,14 @@
+{
+  "name": "@transcend-io/airgap-security-demo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Playable demo of what Transcend Airgap (airgap.js) blocks in the browser",
+  "license": "MIT",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
