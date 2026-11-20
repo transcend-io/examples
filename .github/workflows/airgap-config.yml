@@ -1,0 +1,67 @@
+name: airgap-config
+
+# Dry run on pull requests. Push and deploy on merge to main.
+# Needs the TRANSCEND_API_KEY repository secret for the demo organization (EU).
+# Command names and flags are from @transcend-io/cli 13.4.0 (`--help`).
+on:
+  pull_request:
+    paths:
+      - airgap-security-demo/transcend.yml
+      - .github/workflows/airgap-config.yml
+  push:
+    branches: [main]
+    paths:
+      - airgap-security-demo/transcend.yml
+      - .github/workflows/airgap-config.yml
+
+permissions:
+  contents: read
+
+env:
+  TRANSCEND_URL: https://api.eu.transcend.io
+  TRANSCEND_CLI: '@transcend-io/cli@13.4.0'
+
+jobs:
+  dry-run:
+    # Fork pull requests and Dependabot do not receive repository secrets.
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+      - name: Dry run the config push
+        env:
+          TRANSCEND_API_KEY: ${{ secrets.TRANSCEND_API_KEY }}
+        run: >-
+          npm exec --yes --package="$TRANSCEND_CLI" -- transcend inventory push
+          --file=airgap-security-demo/transcend.yml
+          --transcendUrl="$TRANSCEND_URL"
+          --dryRun
+
+  deploy:
+    if: github.event_name == 'push' && github.repository == 'transcend-io/examples'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+      - name: Push the config
+        env:
+          TRANSCEND_API_KEY: ${{ secrets.TRANSCEND_API_KEY }}
+        run: >-
+          npm exec --yes --package="$TRANSCEND_CLI" -- transcend inventory push
+          --file=airgap-security-demo/transcend.yml
+          --transcendUrl="$TRANSCEND_URL"
+      - name: Deploy the consent manager bundle
+        env:
+          TRANSCEND_API_KEY: ${{ secrets.TRANSCEND_API_KEY }}
+        run: >-
+          npm exec --yes --package="$TRANSCEND_CLI" -- transcend consent update-consent-manager
+          --bundleTypes=PRODUCTION,TEST
+          --deploy
+          --transcendUrl="$TRANSCEND_URL"

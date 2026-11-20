@@ -28,6 +28,7 @@ Some examples of how to integrate with Transcend in various languages. See [our 
 - Ruby
 - Typescript
 - [Coming soon] Go
+- [Airgap security demo](airgap-security-demo): a browser demo of what Transcend Airgap (airgap.js) blocks
 
 ## What are these examples
 
@@ -76,7 +77,6 @@ This is the URL of your Sombra gateway. You can find your URL by visiting [Infra
 
 <img width="1386" alt="Screenshot 2023-02-19 at 2 00 52 PM" src="https://user-images.githubusercontent.com/10264973/219977722-8c15be4d-2508-4090-b06a-0fbfa55c2d7b.png">
 
-
 ### Audience
 
 This is the audience that you will verify is set on the incoming Json Web Tokens (JWTs). You can find your Sombra audience under [Infrastructure -> Sombra](https://app.transcend.io/infrastructure/sombra/sombras) in the Admin Dashboard. This URL is the value titled "SOMBRA AUDIENCE".
@@ -94,9 +94,9 @@ Check out your language of choice for further details
 
 If you want to try out an example that is ready to run, you can head to Replit and fork the example.
 
-The example is located [here](https://replit.com/@giacaglia/Webhook-Transcend?v=1). You will need to first fork the replit and then you can start running the code. The webhook url will be located in the url generated at the top right. You will need to update some of the secrets, including  `TRANSCEND_API_KEY`.
+The example is located [here](https://replit.com/@giacaglia/Webhook-Transcend?v=1). You will need to first fork the replit and then you can start running the code. The webhook url will be located in the url generated at the top right. You will need to update some of the secrets, including `TRANSCEND_API_KEY`.
 
-Here are two videos of how to set it up on Replit: 
+Here are two videos of how to set it up on Replit:
 
 - [First part](https://www.loom.com/share/558f95537e27471b8bc8943cbf5c29d2)
 - [Second part](https://www.loom.com/share/2a6582166d284171893fe00f93629fd4)

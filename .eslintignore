@@ -12,3 +12,4 @@
 *.testjs
 *.testts
 LICENSE
+airgap-security-demo/*
