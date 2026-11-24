@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Airgap must be the first script that runs. No options are needed.
+         The Unknown Request Policy (Block) comes from the organization config. -->
+    <script src="https://transcend-cdn.com/cm/BUNDLE_ID/airgap.js"></script>
     <meta charset="utf-8" />
     <title>Airgap security demo: block</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="data:," />
-    <!-- Airgap must be the first script that runs. -->
-    <!-- airgap.js options for this mode: data-csp="allow-known-hosts allow-subdomains" -->
     <script src="../src/config.js"></script>
-    <script src="../src/load-airgap.js"></script>
     <link rel="stylesheet" href="../src/styles.css" />
   </head>
   <body data-mode="block">

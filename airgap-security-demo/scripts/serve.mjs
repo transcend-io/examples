@@ -15,15 +15,30 @@ const types = {
 };
 
 createServer((request, response) => {
-  const pathname = decodeURIComponent(
-    new URL(request.url, 'http://x').pathname,
-  );
+  let pathname;
+  try {
+    // Start from a fixed path so a target like "//" cannot become a host.
+    pathname = decodeURIComponent(
+      new URL(`http://localhost${request.url.replace(/^\/+/, '/')}`).pathname,
+    );
+  } catch (error) {
+    response.writeHead(400).end('Bad request');
+    return;
+  }
   let file = normalize(join(root, pathname));
-  if (!file.startsWith(root) || !existsSync(file)) {
+  if (!file.startsWith(`${root}/`) && file !== root) {
+    response.writeHead(404).end('Not found');
+    return;
+  }
+  if (!existsSync(file)) {
     response.writeHead(404).end('Not found');
     return;
   }
   if (statSync(file).isDirectory()) file = join(file, 'index.html');
+  if (!existsSync(file)) {
+    response.writeHead(404).end('Not found');
+    return;
+  }
   response.writeHead(200, {
     'content-type': types[extname(file)] || 'application/octet-stream',
   });

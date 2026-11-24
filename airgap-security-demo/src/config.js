@@ -1,8 +1,9 @@
 /**
  * Airgap security demo configuration.
  *
- * To turn on the three Airgap modes, replace BUNDLE_ID below with the bundle
- * ID of the demo organization's consent manager. That is the only edit needed.
+ * To turn on the three Airgap modes, run
+ * `node scripts/set-bundle-id.mjs <bundle-id>`. The script writes the ID to
+ * BUNDLE_ID below and into the static airgap.js script tag of each mode page.
  * The bundle ID is public by design. It is part of the script URL that every
  * page loads. Do not put API keys or secrets in this file.
  *
@@ -21,16 +22,6 @@
     /** Consent manager bundle ID. Replace the placeholder. */
     BUNDLE_ID: 'REPLACE_WITH_DEMO_BUNDLE_ID',
 
-    /** CDN origin that serves consent manager bundles (EU and US). */
-    CDN_ORIGIN: 'https://transcend-cdn.com',
-
-    /**
-     * Host approved in transcend.yml. Scenario 4 calls it.
-     * jsDelivr serves immutable npm files with open CORS headers.
-     */
-    APPROVED_HOST: 'cdn.jsdelivr.net',
-    APPROVED_URL: 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/package.json',
-
     /**
      * Stand-in for an attacker or an unreviewed third party. It is a real
      * static host that needs no server from this repo. It is NOT in
@@ -45,12 +36,24 @@
       'https://raw.githubusercontent.com/transcend-io/examples/main/LICENSE',
 
     /**
+     * Approved host for the last step. It is listed in transcend.yml under
+     * Analytics. The demo asks for a static script file and never sends a hit
+     * to a collection endpoint.
+     */
+    ANALYTICS_HOST: 'www.google-analytics.com',
+    ANALYTICS_URL: 'https://www.google-analytics.com/analytics.js',
+
+    /**
      * Airgap holds a blocked request and never answers it. After this many
      * milliseconds with no answer, the demo reports the request as blocked.
      */
     STALL_TIMEOUT_MS: 3000,
+
+    /** Pause between steps in the Attack replay, so a recording is readable. */
+    REPLAY_PAUSE_MS: 700,
   };
 
+  config.PLACEHOLDER = PLACEHOLDER;
   config.HAS_BUNDLE_ID =
     config.BUNDLE_ID !== PLACEHOLDER && UUID_PATTERN.test(config.BUNDLE_ID);
 
