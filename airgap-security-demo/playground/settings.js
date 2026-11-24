@@ -275,6 +275,14 @@
   }
 
   /**
+   * @param {string} host A validated host name.
+   * @returns {string} The host, safe to embed in a RegExp source.
+   */
+  function escapeHostForRegExp(host) {
+    return host.replace(/\\/g, '\\\\').replace(/[.]/g, '\\.');
+  }
+
+  /**
    * An override that force-allows requests to the approved host.
    *
    * @param {string} host A validated host name.
@@ -283,7 +291,7 @@
   function approveOverride(host) {
     return {
       matcher: new RegExp(
-        `^[\\w-]+:\\/*${host.replace(/[.]/g, '\\.')}(?:[:/?#]|$)`,
+        `^[\\w-]+:\\/*${escapeHostForRegExp(host)}(?:[:/?#]|$)`,
       ),
       override(request) {
         request.allow();
@@ -356,7 +364,7 @@
     ];
     const entries = enabled.map(overrideSource).filter(Boolean);
     if (settings.approve) {
-      const host = settings.approve.replace(/[.]/g, '\\.');
+      const host = escapeHostForRegExp(settings.approve);
       entries.push(
         [
           '    {',
