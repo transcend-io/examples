@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node scripts/serve.mjs",
-    "test": "playwright test"
+    "test": "playwright test",
+    "start:inject": "node scripts/serve.mjs --inject"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0"

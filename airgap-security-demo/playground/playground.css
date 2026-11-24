@@ -1,0 +1,35 @@
+.settings {
+  display: grid;
+  gap: 12px;
+}
+.settings label {
+  display: grid;
+  gap: 4px;
+}
+.settings select,
+.settings input[type='text'],
+.settings input:not([type]) {
+  max-width: 420px;
+  padding: 6px 8px;
+}
+.recipes {
+  border: 1px solid #dde1e6;
+  border-radius: 6px;
+}
+.check {
+  display: flex !important;
+  grid-template-columns: none;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 6px 0;
+}
+.pill-allowed,
+.pill-held,
+.pill-blocked,
+.pill-reported,
+.pill-error {
+  display: inline-block;
+}
+#presets li {
+  margin: 6px 0;
+}
