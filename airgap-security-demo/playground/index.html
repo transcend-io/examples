@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Airgap playground</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <!-- Tag mode. "dynamic": bootstrap.js inserts the airgap.js tag with DOM
+         APIs. "static": scripts/serve.mjs wrote the tag into this page. -->
+    <meta name="playground-tag-mode" content="dynamic" />
+    <!-- These scripts only register settings code and recipes. They send no
+         request. Each file in recipes/ is one override recipe. -->
+    <script src="../src/config.js"></script>
+    <script src="settings.js"></script>
+    <script src="registry.js"></script>
+    <script src="recipes/pin-analytics-account.js"></script>
+    <script src="recipes/block-email.js"></script>
+    <script src="recipes/block-card-and-tokens.js"></script>
+    <script src="recipes/omit-credentials-images.js"></script>
+    <script src="recipes/block-ads-for-minors.js"></script>
+    <script src="recipes/strip-personal-data-from-links.js"></script>
+    <script src="recipes/forward-blocked-to-siem.js"></script>
+    <script src="recipes/custom.js"></script>
+    <script src="bootstrap.js"></script>
+    <!-- AIRGAP_TAG -->
+    <link rel="stylesheet" href="../src/styles.css" />
+    <link rel="stylesheet" href="playground.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="attribution.js"></script>
+    <script src="presets.js"></script>
+    <script src="attacks.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>
